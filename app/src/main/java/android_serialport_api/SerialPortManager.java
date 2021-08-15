@@ -1,6 +1,6 @@
-package com.iraqsoft.mawgood.android_serialport_api;
+package android_serialport_api;
 
-import com.iraqsoft.mawgood.android.fpi.MtGpio;
+import android.fpi.MtGpio;
 import android.os.Build;
 import android.os.HandlerThread;
 import android.os.Looper;

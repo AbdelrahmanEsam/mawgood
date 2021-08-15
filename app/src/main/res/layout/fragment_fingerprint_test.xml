@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.iraqsoft.mawgood.viewmodels.FingerPrintViewModel" />
+
+    </data>
+    <LinearLayout
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_margin="20dp"
+        android:layout_height="match_parent">
+
+        <Button
+            android:text="Enrol"
+            android:id="@+id/btn_enrol"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+<!--        <Button-->
+<!--            android:text="Match"-->
+<!--            android:id="@+id/btn_match"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"/>-->
+
+        <TextView
+            android:id="@+id/tv_tip"
+            android:textSize="18sp"
+            android:layout_margin="5dp"
+            android:text="@{viewModel.status}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/iv_finger"
+            android:text="@{viewModel.fingerPrintData}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            />
+    </LinearLayout>
+</layout>

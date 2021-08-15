@@ -1,4 +1,4 @@
-package com.iraqsoft.mawgood.fgtit.fpcore;
+package com.fgtit.fpcore;
 
 public class FPMatch {
 

@@ -1,4 +1,4 @@
-package com.iraqsoft.mawgood.android.zyapi;
+package android.zyapi;
 
 
 public class CommonApi {

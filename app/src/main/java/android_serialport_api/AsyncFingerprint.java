@@ -1,4 +1,4 @@
-package com.iraqsoft.mawgood.android_serialport_api;
+package android_serialport_api;
 
 import android.os.Handler;
 import android.os.Looper;

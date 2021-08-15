@@ -1,4 +1,4 @@
-package com.iraqsoft.mawgood.android.fpi;
+package android.fpi;
 
 import android.os.Build;
 import android.util.Log;

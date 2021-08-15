@@ -1,12 +1,13 @@
-package com.iraqsoft.mawgood.fgtit.app;
+package com.fgtit.app;
 
 import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
 
 import java.io.IOException;
-import com.iraqsoft.mawgood.android_serialport_api.AsyncFingerprint;
-import com.iraqsoft.mawgood.android_serialport_api.SerialPortManager;
+
+import android_serialport_api.AsyncFingerprint;
+import android_serialport_api.SerialPortManager;
 
 public class Fingerprint {
 	
