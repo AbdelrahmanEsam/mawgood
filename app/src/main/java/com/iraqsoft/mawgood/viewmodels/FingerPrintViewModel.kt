@@ -16,6 +16,8 @@ class FingerPrintViewModel(private val repo : FingerPrintRepo) : ViewModel() {
 
     val status =  MutableLiveData<String>()
     val fingerPrintData = MutableLiveData<String>()
+    val fingerPrintErrorFrom = MutableLiveData<String>()
+    val fingerPrintError = MutableLiveData<String>()
     val isGettingFingerPrint = ObservableBoolean() ;
     fun initFingerPrint() {
         try {
@@ -26,14 +28,21 @@ class FingerPrintViewModel(private val repo : FingerPrintRepo) : ViewModel() {
         }catch (e : UnsatisfiedLinkError){
             fingerPrintData.postValue(e.toString())
         }
+
+        setHandler()
     }
 
-    fun getFingerPrint(): String {
+    private fun setHandler(): String {
        viewModelScope.launch {
            isGettingFingerPrint.set(false);
            Fingerprint.getInstance().setHandler(fingerprintHandler)
        }
         return "done";
+    }
+
+    fun getFingerPrint(){
+        if(!isGettingFingerPrint.get())
+            Fingerprint.getInstance().Process()
     }
 
     private val fingerprintHandler = @SuppressLint("HandlerLeak")
@@ -47,22 +56,50 @@ class FingerPrintViewModel(private val repo : FingerPrintRepo) : ViewModel() {
                 }
 
                 Fingerprint.STATE_GETIMAGE -> {
-                    status.postValue("get fingerPrint data")
+                    try{
+                        fingerPrintErrorFrom.postValue("STATE_GETIMAGE")
+                        status.postValue("get fingerPrint data")
+                    }catch (e : Exception){
+                        fingerPrintError.postValue(e.toString())
+                    }
                 }
 
                 Fingerprint.STATE_UPIMAGE -> {
-                    fingerPrintData.postValue((msg.obj as ByteArray).toString())
+                    try{
+                        fingerPrintErrorFrom.postValue("STATE_UPIMAGE")
+                        val fingerPrintString = String((msg.obj as ByteArray)) ;
+                        fingerPrintData.postValue(fingerPrintString)
+                    }catch (e : Exception){
+                        fingerPrintError.postValue(e.toString())
+                    }
                 }
 
                 Fingerprint.STATE_GENDATA -> {
-                    fingerPrintData.postValue((msg.obj as ByteArray).toString() + "\n" +"this from gendata")
+                    try{
+                        fingerPrintErrorFrom.postValue("STATE_GENDATA")
+                        val fingerPrintString = String((msg.obj as ByteArray))
+                        fingerPrintData.postValue(fingerPrintString)
+                    }catch (e : Exception){
+                        fingerPrintError.postValue(e.toString())
+                    }
                 }
                 Fingerprint.STATE_UPDATA ->{
-                    fingerPrintData.postValue((msg.obj as ByteArray).toString() + "\n" +"this from state updated")
-                    isGettingFingerPrint.set(false)
+                    try{
+                        fingerPrintErrorFrom.postValue("STATE_UPDATA")
+                        val fingerPrintString = String((msg.obj as ByteArray)) ;
+                        fingerPrintData.postValue(fingerPrintString)
+                        isGettingFingerPrint.set(false)
+                    }catch (e : Exception){
+                        fingerPrintError.postValue(e.toString())
+                    }
                 }
                 Fingerprint.STATE_FAIL -> {
-                    Fingerprint.getInstance().Process()
+                    try{
+                        fingerPrintErrorFrom.postValue("STATE_FAIL")
+                        Fingerprint.getInstance().Process()
+                    }catch (e : Exception){
+                        fingerPrintError.postValue(e.toString())
+                    }
                 }
             }
         }

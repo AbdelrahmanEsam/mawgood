@@ -1,6 +1,7 @@
 package com.iraqsoft.mawgood.db.model
 
 import android.os.Parcelable
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
@@ -13,5 +14,7 @@ data class UserModel (
     val lang: String?,
     val name: String?,
     val phone: String?,
-    val token: String?
+    val token: String?,
+    @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
+    val image : ByteArray? = null
 ) : Parcelable

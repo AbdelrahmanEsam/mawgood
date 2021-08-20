@@ -8,12 +8,11 @@ plugins {
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.2"
 
     defaultConfig {
         applicationId "com.iraqsoft.mawgood"
-        minSdkVersion 17
-        targetSdkVersion 30
+        minSdkVersion 19
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true
@@ -22,7 +21,15 @@ android {
 
     }
 
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/maven/org.java-websocket/Java-WebSocket/pom.xml'
 
+    }
 
     buildFeatures {
         viewBinding true
@@ -52,11 +59,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
-repositories {
-    flatDir {
-        dirs 'libs'
-    }
-}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation(name: 'FacePassAndroidSDK-McvSafe-release', ext: 'aar')
