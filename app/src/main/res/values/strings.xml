@@ -1,4 +1,26 @@
 <resources>
     <string name="app_name">mawgood</string>
     <string name="no_network_connectivity">No Network Connectivity</string>
+    <string name="login">تسجيل دخول</string>
+    <string name="user_name">اسم المستخدم</string>
+    <string name="iraq_soft_2021">مثال iraq_soft 2021</string>
+    <string name="password">كلمة السر</string>
+    <string name="enter_the_password">ادخل كلمة السر</string>
+    <string name="login_button">تسجيل</string>
+    <string name="branches">الفروع</string>
+    <string name="confirmed_text">تاكيد</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="main">الرئيسية</string>
+    <string name="finger_print">بصمة اليد</string>
+    <string name="face_print">بصمة الوجه</string>
+    <string name="login_type">رجاء تحديد نوع الدخول</string>
+    <string name="search_hint">البحث عن اسم موظف</string>
+    <string name="select_employee">حدد الموظف</string>
+    <string name="please_enter_your_fingerprint">رجاء ادخال البصمة</string>
+    <string name="fingerprint_succeded">تم ادخال البصمة بنجاح</string>
+    <string name="enter_code">ادخل الكود</string>
+    <string name="your_code">الكود الخاص بك</string>
+    <string name="enter_your_code">ادخل الكود الخاص بك</string>
+    <string name="configs">الاعدادات</string>
 </resources>

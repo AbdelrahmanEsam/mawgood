@@ -11,8 +11,6 @@ import kotlinx.coroutines.withContext
 
 class FingerPrintRepoImp(
     private val api : ApiProvider,
-    private val context : Context,
-    private val db : UserDeo
 ) : FingerPrintRepo{
 
 

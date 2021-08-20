@@ -1,8 +1,7 @@
 package com.iraqsoft.mawgood.di
 
-//import com.iraqsoft.mawgood.viewmodel.CountriesViewModel
 
-import com.iraqsoft.mawgood.viewmodels.FingerPrintViewModel
+import com.iraqsoft.mawgood.viewmodels.*
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -12,6 +11,23 @@ val viewModelModule = module {
     viewModel {
         FingerPrintViewModel(repo = get())
     }
+
+
+    viewModel {
+       LoginViewModel(authRepo = get())
+    }
+
+
+
+    viewModel {
+        MainFragmentViewModel(mainRepo = get())
+    }
+
+    viewModel {
+        DefineEmployeeViewModel(get())
+    }
+
+
 
 
 

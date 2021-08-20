@@ -1,6 +1,7 @@
 package com.iraqsoft.mawgood.util
 
 import android.content.Context
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -29,6 +30,12 @@ fun AppCompatActivity.replaceFragment(fragment: Fragment, frameId: Int, backStac
         replace(frameId, fragment)
         backStackTag?.let { addToBackStack(fragment.javaClass.name) }
     }
+}
+
+
+fun toast(context: Context, toastMessage: String)
+{
+    Toast.makeText(context,toastMessage, Toast.LENGTH_LONG).show()
 }
 
 inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> Unit) {

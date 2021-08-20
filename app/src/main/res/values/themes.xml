@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Mawgood" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Mawgood" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -12,5 +12,82 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+    </style>
+
+
+    <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeColor">@color/borderWhite</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/_10sdp</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/_10sdp</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/_10sdp</item>
+        <item name="boxCornerRadiusTopStart">@dimen/_10sdp</item>
+        <item name="boxBackgroundColor">@color/white</item>
+    </style>
+    
+    <style name="bottomSheetTheme" parent="Theme.Design.BottomSheetDialog">
+      <item name="bottomSheetStyle">@style/bottomSheetStyle</item>
+
+
+    </style>
+
+    <style name="bottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+
+    </style>
+
+    <style name="bottomSheetThemeRadius" parent="Theme.Design.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/bottomSheetStyle</item>
+
+
+    </style>
+
+    <style name="bottomSheetRadius" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/corner_radius</item>
+
+    </style>
+
+
+
+
+
+
+
+    <style name="AppBottomSheetDialogTheme"
+        parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/sheet_background</item>
+    </style>
+
+
+    <style name="cairo_bold_24" >
+        <item name="android:textColor">@color/semiBlack</item>
+        <item name="fontFamily"> @font/cairo_bold </item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textAlignment">viewStart</item>
+    </style>
+
+    <style name="cairo_bold_16" >
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily"> @font/cairo_bold </item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="cairo_regular_16" >
+        <item name="android:textColor">@color/black</item>
+        <item name="fontFamily"> @font/cairo_regular</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textAlignment">viewStart</item>
+    </style>
+
+    <style name="cairo_light_14" >
+        <item name="android:textColor">@color/blackGray</item>
+        <item name="fontFamily"> @font/cairo_light</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAlignment">viewStart</item>
     </style>
 </resources>

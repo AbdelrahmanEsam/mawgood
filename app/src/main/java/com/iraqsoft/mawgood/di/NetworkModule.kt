@@ -40,7 +40,7 @@ val networkModule = module {
 
     single { provideHttpClient() }
     single {
-        val baseUrl = "http://backend.ahmal.org"
+        val baseUrl = "http://209.250.237.58:3001"
         provideRetrofit(get(), baseUrl)
     }
 }

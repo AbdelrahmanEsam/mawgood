@@ -7,4 +7,24 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="semiBlack">#0B090A</color>
+    <color name="semiWhite">#F5F3F4</color>
+    <color name="blueBlack">#0B131E</color>
+    <color name="blue">#2196F3</color>
+    <color name="borderWhite">#E5E9EC</color>
+    <color name="blackGray">#607D8B</color>
+    <color name="lightBlue">#262196F3</color>
+    <color name="darkNightLight">#26777387</color>
+    <color name="darkNightDarkWithOp">#26777387</color>
+    <color name="darkNightDark">#777387</color>
+    <color name="textColorForLightBlue">#161517</color>
+    <color name="gray">#1C1C1C</color>
+    <color name="border">#E5E9EC</color>
+    <color name="green">#32C192</color>
+    <color name="lightBlueClock">#DBEDFF</color>
+    <color name="hour">#0C0F1F</color>
+    <color name="minutes">#9FA7BC</color>
+    <color name="second">#2196F3</color>
+    <color name="transparent">@android:color/transparent</color>
+    <color name="mtrl_textinput_default_box_stroke_color">@color/borderWhite</color>
 </resources>

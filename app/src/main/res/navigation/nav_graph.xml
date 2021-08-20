@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/defineEmployeeFragment"
+        android:name="com.iraqsoft.mawgood.views.fragments.DefineEmployeeFragment"
+        android:label="fragment_define_empolyee"
+        tools:layout="@layout/fragment_define_empolyee" >
+        <action
+            android:id="@+id/action_defineEmployeeFragment_to_printBottomSheet"
+            app:destination="@id/printBottomSheet" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.iraqsoft.mawgood.views.fragments.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_bottomSheetCompanySelector"
+            app:destination="@id/bottomSheetCompanySelector"
+            />
+        <action
+            android:id="@+id/action_mainFragment_to_enterYourCodeFragment"
+            app:destination="@id/enterYourCodeFragment"
+            />
+    </fragment>
+    <dialog
+        android:id="@+id/bottomSheetCompanySelector"
+        android:name="com.iraqsoft.mawgood.views.fragments.BottomSheetBranchesSelector"
+        android:label="BottomSheetCompanySelector"
+        tools:layout="@layout/bottom_sheet_branches_selector"
+        />
+    <dialog
+        android:id="@+id/bottomSheetEmpPrint"
+        android:name="com.iraqsoft.mawgood.views.fragments.BottomSheetEmpPrint"
+        android:label="BottomSheetEmpPrint"
+        tools:layout="@layout/print_succeded_bottom_sheet"
+        />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.iraqsoft.mawgood.views.fragments.LoginFragment"
+        android:label="login_fragment"
+        tools:layout="@layout/login_fragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/enterYourCodeFragment"
+        android:name="com.iraqsoft.mawgood.views.fragments.EnterYourCodeFragment"
+        android:label="fragment_enter_your_code"
+        tools:layout="@layout/fragment_enter_your_code" >
+        <action
+            android:id="@+id/action_enterYourCodeFragment_to_defineEmployeeFragment"
+            app:destination="@id/defineEmployeeFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/printBottomSheet"
+        android:name="com.iraqsoft.mawgood.views.fragments.PrintBottomSheet"
+        android:label="PrintBottomSheet"
+        tools:layout="@layout/print_bottom_sheet"
+        />
+</navigation>
