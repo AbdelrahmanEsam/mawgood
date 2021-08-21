@@ -1,6 +1,7 @@
 package com.iraqsoft.mawgood.db.model
 
 import android.os.Parcelable
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
@@ -21,5 +22,9 @@ data class GetResponseItem(
 
     val phone: String,
 
-    var selected:Boolean
+    var selected:Boolean,
+
+    @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
+    var fingerPrint : ByteArray?
+
 ): Parcelable

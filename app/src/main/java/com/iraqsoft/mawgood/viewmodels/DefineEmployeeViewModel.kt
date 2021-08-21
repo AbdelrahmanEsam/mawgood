@@ -46,7 +46,7 @@ class DefineEmployeeViewModel(private val defineEmployeeRepo:DefineEmployeeRepos
         viewModelScope.launch(IO) {
            val requestFromDataBase = getEmployeesFromDataBase()
            if (requestFromDataBase.isNotEmpty()){
-               Log.d("abdo","cache")
+               Log.e("abdo","cache")
                withContext(Main){
                    val response = GetResponse()
                    response.addAll(requestFromDataBase)
@@ -64,11 +64,10 @@ class DefineEmployeeViewModel(private val defineEmployeeRepo:DefineEmployeeRepos
 
     private fun getEmployeesFromApiRequest()
     {
+        Log.e("getResponse" , "getting emps fron the Api ")
         viewModelScope.launch(IO) {
         val companyId = async { getCompanyId() }
         val branchId    = async { getBranchId() }
-
-
             when(val response = defineEmployeeRepo.requestEmployeesFromApi(companyId = companyId.await(),branchId = branchId.await())){
                 is AppResult.Success -> {
                     withContext(Main){
@@ -77,7 +76,7 @@ class DefineEmployeeViewModel(private val defineEmployeeRepo:DefineEmployeeRepos
                     }
                 }
                 is AppResult.Error -> {
-                   Log.d("tag","response error")
+                   Log.e("tag",response.exception.toString())
                 }
             }
         }

@@ -23,12 +23,11 @@ class DefineEmployeeRepositoryEmp(private val api : ApiProvider, private val use
     }
 
     override suspend fun requestEmployeesFromApi(companyId: String, branchId: String): AppResult<GetResponse>? {
-
-
        return try {
            val response =  api.getEmployees(companyId,branchId)
             if(response.isSuccessful){
                 response.body()?.let {
+                    Log.e("getItemsResponse" , response.body().toString())
                     withContext(Dispatchers.IO){
                         cacheEmployees(response.body()!!)
                     }

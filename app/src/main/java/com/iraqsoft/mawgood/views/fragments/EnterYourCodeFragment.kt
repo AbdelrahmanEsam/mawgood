@@ -31,6 +31,7 @@ class EnterYourCodeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         nav = Navigation.findNavController(view)
        cacheButtonListener()
+        back()
     }
 
     override fun onDestroyView() {
@@ -72,7 +73,12 @@ class EnterYourCodeFragment : Fragment() {
     }
 
 
-
+    private fun back()
+    {
+        binding.backImageView.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
+    }
 
 
 

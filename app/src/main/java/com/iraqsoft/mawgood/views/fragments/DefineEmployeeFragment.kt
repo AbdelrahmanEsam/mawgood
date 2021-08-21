@@ -41,6 +41,7 @@ class DefineEmployeeFragment : Fragment(R.layout.fragment_define_empolyee) ,Empl
         nav = Navigation.findNavController(view)
         branchesObserver()
         queryObserver()
+        back()
 
     }
 
@@ -83,6 +84,11 @@ class DefineEmployeeFragment : Fragment(R.layout.fragment_define_empolyee) ,Empl
            list!! ,position))
 
     }
-
+    private fun back()
+    {
+        binding.backImageView.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
+    }
 
 }

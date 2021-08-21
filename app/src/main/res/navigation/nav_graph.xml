@@ -45,7 +45,8 @@
         >
         <argument
             android:name="selectedEmp"
-            app:argType="com.iraqsoft.mawgood.db.model.GetResponse" />
+            app:argType="com.iraqsoft.mawgood.db.model.GetResponse"
+            app:nullable="true" />
         <argument
             android:name="position"
             app:argType="integer" />

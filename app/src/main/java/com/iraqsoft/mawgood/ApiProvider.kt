@@ -20,8 +20,9 @@ import retrofit2.http.*
         @GET("/users")
         suspend fun getEmployees(@Query("company") company : String, @Query("branch") branch :String ): Response<GetResponse>
 
+        @FormUrlEncoded
         @POST("/reports/check")
-        suspend fun addAccurateCost(@Header("Authorization") authorization:String,): Response<CheckInAndOutResponse>
+        suspend fun check(@Field("employeeId") empId : String ): Response<CheckInAndOutResponse>
 
 
 

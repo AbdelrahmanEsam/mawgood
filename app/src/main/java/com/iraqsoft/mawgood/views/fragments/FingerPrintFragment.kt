@@ -28,7 +28,7 @@ class FingerPrintFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mViewDataBinding.viewModel = fingerPrintViewModel
-        fingerPrintViewModel.initFingerPrint()
+//        fingerPrintViewModel.initFingerPrint()
         btn_enrol.setOnClickListener{
             fingerPrintViewModel.getFingerPrint();
         }

@@ -37,10 +37,6 @@ class PrintBottomSheet : BottomSheetDialogFragment() {
         }
         setData()
 
-
-
-
-
     }
 
     private fun setData(){

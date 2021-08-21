@@ -89,8 +89,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     private fun navigateToFingerprintBottomSheet()
     {
-        nav.navigate(R.id.action_mainFragment_to_bottomSheetEmpPrint)
+        nav.navigate(MainFragmentDirections.actionMainFragmentToBottomSheetEmpPrint(null , -1))
     }
-
 
 }
