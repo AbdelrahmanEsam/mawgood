@@ -9,10 +9,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fgtit.app.Fingerprint
 import com.fgtit.fpcore.FPMatch
-import com.iraqsoft.mawgood.repo.fingerPrint.FingerPrintRepo
 import kotlinx.coroutines.launch
 
-class FingerPrintViewModel(private val repo : FingerPrintRepo) : ViewModel() {
+class FingerPrintViewModel() : ViewModel() {
 
     val status =  MutableLiveData<String>()
     val fingerPrintData = MutableLiveData<String>()
@@ -65,23 +64,8 @@ class FingerPrintViewModel(private val repo : FingerPrintRepo) : ViewModel() {
                 }
 
                 Fingerprint.STATE_UPIMAGE -> {
-                    try{
-                        fingerPrintErrorFrom.postValue("STATE_UPIMAGE")
-                        val fingerPrintString = String((msg.obj as ByteArray)) ;
-                        fingerPrintData.postValue(fingerPrintString)
-                    }catch (e : Exception){
-                        fingerPrintError.postValue(e.toString())
-                    }
                 }
-
                 Fingerprint.STATE_GENDATA -> {
-                    try{
-                        fingerPrintErrorFrom.postValue("STATE_GENDATA")
-                        val fingerPrintString = String((msg.obj as ByteArray))
-                        fingerPrintData.postValue(fingerPrintString)
-                    }catch (e : Exception){
-                        fingerPrintError.postValue(e.toString())
-                    }
                 }
                 Fingerprint.STATE_UPDATA ->{
                     try{

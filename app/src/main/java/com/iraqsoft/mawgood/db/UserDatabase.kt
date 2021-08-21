@@ -8,7 +8,7 @@ import com.iraqsoft.mawgood.db.model.LoginCompanyResponse
 
 @Database(
     entities = [LoginCompanyResponse::class, Branch::class,GetResponseItem::class],
-    version = 7, exportSchema = false
+    version = 8, exportSchema = false
 )
 
 
