@@ -30,12 +30,7 @@ class DefineEmployeeRepositoryEmp(private val api : ApiProvider, private val use
             if(response.isSuccessful){
                 response.body()?.let {
                     withContext(Dispatchers.IO){
-                        var emp = response.body()
-                        emp?.map {
-                            val startArray = byteArrayOf(0x1, 0x2, 0x3,0x3,0x3,0x3,0x3)
-                            it.fingerPrint = startArray
-                        }
-                       employeesDao.addSelectedEmployees(emp!!)
+                       employeesDao.addSelectedEmployees(response.body()!!)
                     }
                     handleSuccess(response)
                 }

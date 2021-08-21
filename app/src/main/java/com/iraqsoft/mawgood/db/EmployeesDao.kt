@@ -15,4 +15,7 @@ interface EmployeesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addSelectedEmployees(selectedEmployees:List<GetResponseItem>)
 
+    @Insert(onConflict =  OnConflictStrategy.REPLACE)
+    fun addSingleEmp(emp : GetResponseItem)
+
 }
