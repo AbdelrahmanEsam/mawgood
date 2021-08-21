@@ -28,9 +28,14 @@ val repositoryModule = module {
         return DefineEmployeeRepositoryEmp(api,userDao,selectedBranchesDao,employeesDao)
     }
 
+    fun provideFingerPrintRepo(api: ApiProvider,employeesDao: EmployeesDao): FingerPrintRpoInterface {
+        return FingerPrintRepository(api,employeesDao)
+    }
+
     single { provideLoginRepo(get(), get()) }
     single { provideMainFragmentRepo(get(),get()) }
     single { provideDefineEmployeeRepo(get(),get(),get(),get()) }
+    single { provideFingerPrintRepo(get(),get())}
 
 
 }

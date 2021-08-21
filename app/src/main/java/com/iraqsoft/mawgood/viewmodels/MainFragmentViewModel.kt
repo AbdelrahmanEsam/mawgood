@@ -1,5 +1,4 @@
 package com.iraqsoft.mawgood.viewmodels
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,8 +14,6 @@ class MainFragmentViewModel(private val mainRepo: MainFragmentRepositoryInterfac
 
 
      val enteredCode= MutableLiveData<String>()
-
-
 
     private val _cachedBranches= MutableLiveData<MutableList<Branch>>()
     val cachedBranches: LiveData<MutableList<Branch>> get()= _cachedBranches

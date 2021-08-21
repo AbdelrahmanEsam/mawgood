@@ -8,14 +8,21 @@ import android.viewbinding.library.dialogfragment.viewBinding
 import androidx.annotation.Nullable
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.iraqsoft.mawgood.R
 import com.iraqsoft.mawgood.databinding.FragmentMainBinding
 import com.iraqsoft.mawgood.databinding.PrintSuccededBottomSheetBinding
+import com.iraqsoft.mawgood.util.toast
+import com.iraqsoft.mawgood.viewmodels.FingerPrintViewModel
+import com.iraqsoft.mawgood.viewmodels.MainFragmentViewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class BottomSheetEmpPrint : BottomSheetDialogFragment() {
 
     private val binding: PrintSuccededBottomSheetBinding by viewBinding()
+    private val args:BottomSheetEmpPrintArgs by navArgs()
+    val fingerprintViewModel by viewModel<FingerPrintViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +32,7 @@ class BottomSheetEmpPrint : BottomSheetDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,5 +43,11 @@ class BottomSheetEmpPrint : BottomSheetDialogFragment() {
             requireActivity().onBackPressed()
         }
 
+        binding.fingerPrintImageView.setOnClickListener {
+            binding.doneButton.visibility = View.VISIBLE
+        }
     }
+
+
+
 }

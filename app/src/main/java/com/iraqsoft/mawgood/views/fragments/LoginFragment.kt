@@ -34,9 +34,10 @@ class LoginFragment : Fragment() {
         nav = Navigation.findNavController(view)
         binding.loginButton.setOnClickListener {
             loginViewModel.login()
-            loginObserver()
+            errorObserver()
         }
-        errorObserver()
+        loginObserver()
+
 
 
 

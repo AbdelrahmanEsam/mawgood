@@ -30,7 +30,7 @@ class DefineEmployeeRepositoryEmp(private val api : ApiProvider, private val use
             if(response.isSuccessful){
                 response.body()?.let {
                     withContext(Dispatchers.IO){
-                       employeesDao.addSelectedEmployees(response.body()!!)
+                        cacheEmployees(response.body()!!)
                     }
                     handleSuccess(response)
                 }
@@ -48,6 +48,10 @@ class DefineEmployeeRepositoryEmp(private val api : ApiProvider, private val use
         return withContext(Dispatchers.IO) {
             employeesDao.getSelectedEmployees()
         }
+    }
+
+    override suspend fun cacheEmployees(cache: List<GetResponseItem>) {
+        employeesDao.addSelectedEmployees(cache)
     }
 
 

@@ -29,12 +29,19 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         super.onViewCreated(view, savedInstanceState)
         nav = Navigation.findNavController(view)
         cachedBranchesObserver()
+        listeners()
+
+
+
+
+
+
+
+    }
+
+    private fun listeners(){
         settingsListener()
-
-
-
-
-
+        fingerprintListener()
     }
 
 
@@ -44,6 +51,15 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             navigateToEnterYourCode()
         }
     }
+
+    private fun fingerprintListener()
+    {
+        binding.cardViewFingerPrint.setOnClickListener {
+            navigateToFingerprintBottomSheet()
+        }
+    }
+
+
 
     private fun cachedBranchesObserver()
     {
@@ -69,6 +85,11 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     private fun navigateToEnterYourCode(){
         nav.navigate(R.id.action_mainFragment_to_enterYourCodeFragment)
+    }
+
+    private fun navigateToFingerprintBottomSheet()
+    {
+        nav.navigate(R.id.action_mainFragment_to_bottomSheetEmpPrint)
     }
 
 

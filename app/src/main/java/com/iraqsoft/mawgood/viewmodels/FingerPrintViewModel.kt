@@ -9,16 +9,22 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fgtit.app.Fingerprint
 import com.fgtit.fpcore.FPMatch
+import com.iraqsoft.mawgood.repository.FingerPrintRpoInterface
 import kotlinx.coroutines.launch
 
-class FingerPrintViewModel() : ViewModel() {
+class FingerPrintViewModel(fingerprintRepo: FingerPrintRpoInterface) : ViewModel() {
 
+    private var direction = 0
+    private lateinit  var enrollData:ByteArray
+    private  var enrollCount = 1
     val status =  MutableLiveData<String>()
     val fingerPrintData = MutableLiveData<String>()
     val fingerPrintErrorFrom = MutableLiveData<String>()
     val fingerPrintError = MutableLiveData<String>()
-    val isGettingFingerPrint = ObservableBoolean() ;
-    fun initFingerPrint() {
+    val isGettingFingerPrint = ObservableBoolean()
+    fun initFingerPrint(direction:Int) {
+        this.direction = direction
+
         try {
             FPMatch.getInstance().InitMatch()
             Fingerprint.getInstance().Open()
@@ -50,14 +56,14 @@ class FingerPrintViewModel() : ViewModel() {
         override fun handleMessage(msg: Message) {
             when(msg.what){
                  Fingerprint.STATE_PLACE -> {
-                     isGettingFingerPrint.set(true);
-                     status.postValue("please add your fingerPrint")
+                     isGettingFingerPrint.set(true)
+                     status.postValue( "رجاء ادخل البصمة")
                 }
 
                 Fingerprint.STATE_GETIMAGE -> {
                     try{
                         fingerPrintErrorFrom.postValue("STATE_GETIMAGE")
-                        status.postValue("get fingerPrint data")
+                        status.postValue("يتم قراءة البصمة")
                     }catch (e : Exception){
                         fingerPrintError.postValue(e.toString())
                     }
@@ -69,6 +75,15 @@ class FingerPrintViewModel() : ViewModel() {
                 }
                 Fingerprint.STATE_UPDATA ->{
                     try{
+                        val data = msg.obj as ByteArray
+                        if (enrollCount == 1){
+                            System.arraycopy(data,0,enrollData,0,256)
+                            enrollCount++
+                            Thread.sleep(500L)
+                            Fingerprint.getInstance().Process()
+                        }else if(enrollCount == 2){
+
+                        }
                         fingerPrintErrorFrom.postValue("STATE_UPDATA")
                         val fingerPrintString = String((msg.obj as ByteArray)) ;
                         fingerPrintData.postValue(fingerPrintString)

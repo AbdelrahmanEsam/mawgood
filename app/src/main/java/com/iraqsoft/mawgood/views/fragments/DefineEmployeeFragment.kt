@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.viewbinding.library.fragment.viewBinding
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.iraqsoft.mawgood.R
@@ -26,6 +28,7 @@ class DefineEmployeeFragment : Fragment(R.layout.fragment_define_empolyee) ,Empl
     private lateinit var  binding : FragmentDefineEmpolyeeBinding
     private   val defineViewModel by viewModel<DefineEmployeeViewModel>()
     private lateinit var employeeAdapter: EmployeesAdapter
+    private lateinit var nav: NavController
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
        super.onCreateView(inflater, container, savedInstanceState)
@@ -35,6 +38,7 @@ class DefineEmployeeFragment : Fragment(R.layout.fragment_define_empolyee) ,Empl
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        nav = Navigation.findNavController(view)
         branchesObserver()
         queryObserver()
 
@@ -62,7 +66,6 @@ class DefineEmployeeFragment : Fragment(R.layout.fragment_define_empolyee) ,Empl
     private fun queryObserver()
     {
        defineViewModel.query.observe(viewLifecycleOwner,{
-           Log.d("yep","djbdsj")
            if (!it.isNullOrBlank()) {
                defineViewModel.searchEmployeeList(it)
                employeeAdapter.notifyDataSetChanged()
@@ -75,6 +78,9 @@ class DefineEmployeeFragment : Fragment(R.layout.fragment_define_empolyee) ,Empl
     override fun onEmployeeListener(position: Int) {
         defineViewModel.employees.value?.get(position)?.selected   =   !defineViewModel.employees.value?.get(position)?.selected!!
         employeeAdapter.notifyItemChanged(position)
+        val list = defineViewModel.employees.value
+        nav.navigate(DefineEmployeeFragmentDirections.actionDefineEmployeeFragmentToPrintBottomSheet(
+           list!! ,position))
 
     }
 

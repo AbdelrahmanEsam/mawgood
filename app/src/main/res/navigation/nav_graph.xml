@@ -27,6 +27,9 @@
             android:id="@+id/action_mainFragment_to_enterYourCodeFragment"
             app:destination="@id/enterYourCodeFragment"
             />
+        <action
+            android:id="@+id/action_mainFragment_to_bottomSheetEmpPrint"
+            app:destination="@id/bottomSheetEmpPrint" />
     </fragment>
     <dialog
         android:id="@+id/bottomSheetCompanySelector"
@@ -39,7 +42,14 @@
         android:name="com.iraqsoft.mawgood.views.fragments.BottomSheetEmpPrint"
         android:label="BottomSheetEmpPrint"
         tools:layout="@layout/print_succeded_bottom_sheet"
-        />
+        >
+        <argument
+            android:name="selectedEmp"
+            app:argType="com.iraqsoft.mawgood.db.model.GetResponse" />
+        <argument
+            android:name="position"
+            app:argType="integer" />
+    </dialog>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.iraqsoft.mawgood.views.fragments.LoginFragment"
@@ -67,5 +77,15 @@
         android:name="com.iraqsoft.mawgood.views.fragments.PrintBottomSheet"
         android:label="PrintBottomSheet"
         tools:layout="@layout/print_bottom_sheet"
-        />
+        >
+        <action
+            android:id="@+id/action_printBottomSheet_to_bottomSheetEmpPrint"
+            app:destination="@id/bottomSheetEmpPrint" />
+        <argument
+            android:name="selectedEmp"
+            app:argType="com.iraqsoft.mawgood.db.model.GetResponse" />
+        <argument
+            android:name="position"
+            app:argType="integer" />
+    </dialog>
 </navigation>

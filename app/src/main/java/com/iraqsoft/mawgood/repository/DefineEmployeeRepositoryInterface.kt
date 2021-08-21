@@ -17,4 +17,9 @@ interface DefineEmployeeRepositoryInterface {
     suspend fun requestEmployeesFromDataBase() : List<GetResponseItem>
 
 
+    suspend fun cacheEmployees(cache :List<GetResponseItem>)
+
+
+
+
 }

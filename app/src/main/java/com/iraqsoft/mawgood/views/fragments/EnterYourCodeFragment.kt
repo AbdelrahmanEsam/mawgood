@@ -31,8 +31,11 @@ class EnterYourCodeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         nav = Navigation.findNavController(view)
        cacheButtonListener()
+    }
 
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        (requireActivity() as MainActivity2).mainViewModel.enteredCode.value = ""
     }
 
     private fun cacheButtonListener()
@@ -53,6 +56,7 @@ class EnterYourCodeFragment : Fragment() {
                 }else{
                     if (  (requireActivity() as MainActivity2).mainViewModel.cachedBranches.value?.get(0)?.code
                         ==(requireActivity() as MainActivity2).mainViewModel.enteredCode.value){
+
                           nav.navigate(R.id.action_enterYourCodeFragment_to_defineEmployeeFragment)
                     }else{
 

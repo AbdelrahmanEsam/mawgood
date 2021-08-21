@@ -18,8 +18,8 @@ import kotlinx.coroutines.withContext
 
 class DefineEmployeeViewModel(private val defineEmployeeRepo:DefineEmployeeRepositoryInterface):ViewModel() {
 
-    private val _employees= MutableLiveData<List<GetResponseItem>>()
-    val employees: LiveData<List<GetResponseItem>> get()= _employees
+    private val _employees= MutableLiveData<GetResponse>()
+    val employees: LiveData<GetResponse> get()= _employees
 
     private val _searchedList= MutableLiveData<List<GetResponseItem>>()
     val searchedList: LiveData<List<GetResponseItem>> get()= _searchedList
@@ -41,39 +41,51 @@ class DefineEmployeeViewModel(private val defineEmployeeRepo:DefineEmployeeRepos
 
     }
 
-    private fun getEmployeesRequest()
+   private fun getEmployees()
     {
         viewModelScope.launch(IO) {
-            val companyId = async { getCompanyId() }
-            val branchId = async { getBranchId() }
-            var response = defineEmployeeRepo.requestEmployeesFromDataBase()
-            Log.e("empResponse1" , response.size.toString())
-            if (response.isEmpty()) {
-                Log.e("empResponse1" , "response from db is empty")
-                when (val response2 = defineEmployeeRepo.requestEmployeesFromApi(
-                    companyId = companyId.await(),
-                    branchId = branchId.await()
-                )) {
-                    is AppResult.Success -> {
-                        withContext(Main) {
-                            _employees.value = response2.successData!!
-                            _searchedList.value = _employees.value
-                        }
-                    }
-                    is AppResult.Error -> {
-                        Log.d("tag", "response error")
+           val requestFromDataBase = getEmployeesFromDataBase()
+           if (requestFromDataBase.isNotEmpty()){
+               Log.d("abdo","cache")
+               withContext(Main){
+                   val response = GetResponse()
+                   response.addAll(requestFromDataBase)
+                   _employees.value = response
+                   _searchedList.value = _employees.value
+               }
+           }else {
+               getEmployeesFromApiRequest()
+           }
+
+
+        }
+
+    }
+
+    private fun getEmployeesFromApiRequest()
+    {
+        viewModelScope.launch(IO) {
+        val companyId = async { getCompanyId() }
+        val branchId    = async { getBranchId() }
+
+
+            when(val response = defineEmployeeRepo.requestEmployeesFromApi(companyId = companyId.await(),branchId = branchId.await())){
+                is AppResult.Success -> {
+                    withContext(Main){
+                       _employees.value = response.successData!!
+                        _searchedList.value = _employees.value
                     }
                 }
-            }else{
-                Log.e("empResponse1" , "response from db is not Empty")
-                Log.e("empResponse1" , response[0].displayName)
-                Log.e("empResponse1" , String(response[0].fingerPrint))
-                withContext(Main){
-                    _employees.value = response
-                    _searchedList.value = _employees.value
+                is AppResult.Error -> {
+                   Log.d("tag","response error")
                 }
             }
         }
+
+    }
+
+    private suspend fun getEmployeesFromDataBase(): List<GetResponseItem> {
+      return  defineEmployeeRepo.requestEmployeesFromDataBase()
     }
 
 
@@ -89,12 +101,17 @@ class DefineEmployeeViewModel(private val defineEmployeeRepo:DefineEmployeeRepos
         }
     }
 
+    private fun cacheEmployees()
+    {
+
+    }
+
     fun setDefaultSearchedList(){
         _searchedList.value = _employees.value
     }
 
     init {
-        getEmployeesRequest()
+       getEmployees()
     }
 
 }
