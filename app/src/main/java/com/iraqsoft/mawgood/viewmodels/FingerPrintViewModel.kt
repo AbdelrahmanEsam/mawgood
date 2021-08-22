@@ -21,11 +21,12 @@ import kotlinx.coroutines.withContext
 class FingerPrintViewModel(private val fingerprintRepo: FingerPrintRpoInterface) : ViewModel() {
 
     private var direction = 0
-    private lateinit  var enrollData:ByteArray
+    private   var enrollData:ByteArray = ByteArray(512)
     private  var enrollCount = 1
     val status =  MutableLiveData<String>()
     val fingerPrintData = MutableLiveData<String>()
     val fingerPrintErrorFrom = MutableLiveData<String>()
+    val fingerPrintMatch = MutableLiveData<Int>()
     val fingerPrintError = MutableLiveData<String>()
     val isGettingFingerPrint = ObservableBoolean()
     val saveFingerprintSuccess = ObservableBoolean()
@@ -35,6 +36,7 @@ class FingerPrintViewModel(private val fingerprintRepo: FingerPrintRpoInterface)
             Log.e("fingerPrintViewModel" , "direction is :$direction")
             status.value = "رجاء ادخل البصمة"
             saveFingerprintSuccess.set(false)
+            fingerPrintMatch.value = -1 ;
             this.direction = direction
             this.emp = empData
             FPMatch.getInstance().InitMatch()
@@ -68,6 +70,7 @@ class FingerPrintViewModel(private val fingerprintRepo: FingerPrintRpoInterface)
             when(msg.what){
                  Fingerprint.STATE_PLACE -> {
                      isGettingFingerPrint.set(true)
+                     fingerPrintMatch.value = -1 ;
                      val message = if(enrollCount == 1 )
                          "رجاء ادخل البصمة"
                      else
@@ -114,17 +117,18 @@ class FingerPrintViewModel(private val fingerprintRepo: FingerPrintRpoInterface)
                             viewModelScope.launch(IO){
                                 var emp : List<GetResponseItem>  = fingerprintRepo.getEmps();
                                 emp.forEach{
-                                    var enroll1 = byteArrayOf()
-                                    var enroll2 = byteArrayOf()
+                                    var enroll1 = ByteArray(256)
+                                    var enroll2 = ByteArray(256)
                                     if(it.fingerPrint != null ) {
                                         System.arraycopy(it.fingerPrint, 0, enroll1, 0, 256)
                                         System.arraycopy(it.fingerPrint,256 , enroll2, 0, 256)
                                     }
-                                    if(FPMatch.getInstance().MatchTemplate(enroll1 , it.fingerPrint) < 60 || FPMatch.getInstance().MatchTemplate(enroll2 , it.fingerPrint) > 60){
+                                    if(FPMatch.getInstance().MatchTemplate(enroll1 , it.fingerPrint) > 60 || FPMatch.getInstance().MatchTemplate(enroll2 , it.fingerPrint) > 60){
                                         when(val response = fingerprintRepo.empCheck(empId = it._id)){
                                             is AppResult.Success -> {
                                                 withContext(Main){
                                                   saveFingerprintSuccess.set(true)
+                                                    fingerPrintMatch.value = 1 ;
                                                 }
                                             }
                                             is AppResult.Error -> {
@@ -132,6 +136,10 @@ class FingerPrintViewModel(private val fingerprintRepo: FingerPrintRpoInterface)
                                             }
                                         }
                                     }
+                                }
+                                if(fingerPrintMatch.value == -1 ) {
+                                    saveFingerprintSuccess.set(false)
+                                    fingerPrintMatch.postValue(0)
                                 }
                             }
                         }
