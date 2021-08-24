@@ -94,17 +94,17 @@ class FingerPrintViewModel(private val fingerprintRepo: FingerPrintRpoInterface)
                 }
                 Fingerprint.STATE_UPDATA ->{
                     try{
-                        val data = msg.obj as ByteArray
+                        val fingerData = msg.obj as ByteArray
                         fingerPrintErrorFrom.postValue("STATE_UPDATA")
                         if(direction == 1 ){
                             if (enrollCount == 1){
-                                System.arraycopy(data,0,enrollData,0,256)
+                                System.arraycopy(fingerData,0,enrollData,0,256)
                                 enrollCount++
                                 Thread.sleep(500L)
                                 Fingerprint.getInstance().Process()
                             }
                             else if(enrollCount == 2){
-                                System.arraycopy(data , 0 , enrollData , 256 , 256 )
+                                System.arraycopy(fingerData , 0 , enrollData , 256 , 256 )
                                 emp?.fingerPrint = enrollData ;
                                 viewModelScope.launch(IO) {
                                     fingerprintRepo.cashSingleEmp(emp)
@@ -115,7 +115,9 @@ class FingerPrintViewModel(private val fingerprintRepo: FingerPrintRpoInterface)
                             }
                         }else{
                             viewModelScope.launch(IO){
-                                var emp : List<GetResponseItem>  = fingerprintRepo.getEmps();
+                                var emp : List<GetResponseItem>  = fingerprintRepo.getEmps()
+                                val matchedData = ByteArray(512)
+                                System.arraycopy(fingerData , 0 , matchedData , 0 , 256) ;
                                 emp.forEach{
                                     var enroll1 = ByteArray(256)
                                     var enroll2 = ByteArray(256)
@@ -123,13 +125,14 @@ class FingerPrintViewModel(private val fingerprintRepo: FingerPrintRpoInterface)
                                         System.arraycopy(it.fingerPrint, 0, enroll1, 0, 256)
                                         System.arraycopy(it.fingerPrint,256 , enroll2, 0, 256)
                                     }
-                                    if(FPMatch.getInstance().MatchTemplate(enroll1 , it.fingerPrint) > 60 || FPMatch.getInstance().MatchTemplate(enroll2 , it.fingerPrint) > 60){
+                                    if(FPMatch.getInstance().MatchTemplate(enroll1 ,matchedData) > 60 || FPMatch.getInstance().MatchTemplate(enroll2 , matchedData) > 60){
+                                            saveFingerprintSuccess.set(true)
+                                            fingerPrintMatch.postValue(1)
+                                            status.postValue("تمت المعالجة بنجاح")
+
                                         when(val response = fingerprintRepo.empCheck(empId = it._id)){
                                             is AppResult.Success -> {
-                                                withContext(Main){
-                                                  saveFingerprintSuccess.set(true)
-                                                    fingerPrintMatch.value = 1 ;
-                                                }
+
                                             }
                                             is AppResult.Error -> {
                                                 Log.e("tag",response.exception.toString())
@@ -141,10 +144,14 @@ class FingerPrintViewModel(private val fingerprintRepo: FingerPrintRpoInterface)
                                     saveFingerprintSuccess.set(false)
                                     fingerPrintMatch.postValue(0)
                                 }
+
+//
+//                                Thread.sleep(10000L)
+//                                Fingerprint.getInstance().Process()
                             }
                         }
-                        isGettingFingerPrint.set(false)
 
+                        isGettingFingerPrint.set(false)
                     }catch (e : Exception){
                         fingerPrintError.postValue(e.toString())
                     }
