@@ -16,6 +16,7 @@ import com.iraqsoft.mawgood.R
 import com.iraqsoft.mawgood.databinding.FragmentDefineEmpolyeeBinding
 import com.iraqsoft.mawgood.databinding.FragmentEnterYourCodeBinding
 import com.iraqsoft.mawgood.databinding.FragmentMainBinding
+import com.iraqsoft.mawgood.util.SpacesItemDecoration
 import com.iraqsoft.mawgood.viewmodels.DefineEmployeeViewModel
 import com.iraqsoft.mawgood.viewmodels.MainFragmentViewModel
 import com.iraqsoft.mawgood.views.activities.MainActivity2
@@ -60,6 +61,7 @@ class DefineEmployeeFragment : Fragment(R.layout.fragment_define_empolyee) ,Empl
         binding.employeeRecyclerView.apply {
             layoutManager = linear
             adapter = employeeAdapter
+            addItemDecoration(SpacesItemDecoration(20))
         }
 
     }
@@ -77,11 +79,16 @@ class DefineEmployeeFragment : Fragment(R.layout.fragment_define_empolyee) ,Empl
     }
 
     override fun onEmployeeListener(position: Int) {
-        defineViewModel.employees.value?.get(position)?.selected   =   !defineViewModel.employees.value?.get(position)?.selected!!
+        if( defineViewModel.oldEmployee.value != -1) {
+            defineViewModel.employees.value?.get(defineViewModel.oldEmployee.value!!)?.selected   = false
+            employeeAdapter.notifyItemChanged(defineViewModel.oldEmployee.value!!)
+        }
+        defineViewModel.setOldEmployee(position)
         employeeAdapter.notifyItemChanged(position)
         val list = defineViewModel.employees.value
         nav.navigate(DefineEmployeeFragmentDirections.actionDefineEmployeeFragmentToPrintBottomSheet(
-           list!! ,position))
+            list!! ,position))
+
 
     }
     private fun back()
@@ -90,5 +97,7 @@ class DefineEmployeeFragment : Fragment(R.layout.fragment_define_empolyee) ,Empl
             requireActivity().onBackPressed()
         }
     }
+
+
 
 }

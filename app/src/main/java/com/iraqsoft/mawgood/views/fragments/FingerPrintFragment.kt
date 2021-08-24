@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.fragment_fingerprint_test.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class FingerPrintFragment : Fragment() {
-    private val fingerPrintViewModel by viewModel<FingerPrintViewModel>() ;
+    private val fingerPrintViewModel by viewModel<FingerPrintViewModel>()
     private lateinit var mViewDataBinding: FragmentFingerprintTestBinding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mViewDataBinding  = DataBindingUtil.inflate(inflater,

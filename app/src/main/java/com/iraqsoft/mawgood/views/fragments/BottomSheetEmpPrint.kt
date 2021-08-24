@@ -49,7 +49,7 @@ class BottomSheetEmpPrint : BottomSheetDialogFragment() {
         var directions = 2 ;
         if(args?.position != -1 ) {
             emp = args?.selectedEmp!![args?.position]
-            directions = 1 ;
+            directions = 1
         }
 
         fingerprintViewModel.initFingerPrint(directions , emp)

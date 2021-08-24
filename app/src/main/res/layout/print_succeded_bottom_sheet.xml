@@ -29,7 +29,7 @@
             app:srcCompat="@drawable/ic_close" />
 
         <TextView
-            android:id="@+id/branchesTextView"
+            android:id="@+id/statusTextView"
             style="@style/cairo_regular_16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,9 +45,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_25sdp"
-            app:layout_constraintEnd_toEndOf="@+id/branchesTextView"
-            app:layout_constraintStart_toStartOf="@+id/branchesTextView"
-            app:layout_constraintTop_toBottomOf="@+id/branchesTextView"
+            app:layout_constraintEnd_toEndOf="@+id/statusTextView"
+            app:layout_constraintStart_toStartOf="@+id/statusTextView"
+            app:layout_constraintTop_toBottomOf="@+id/statusTextView"
             app:srcCompat="@drawable/ic_finger" />
 
         <androidx.appcompat.widget.AppCompatButton

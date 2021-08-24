@@ -20,8 +20,8 @@ class MainFragmentViewModel(private val mainRepo: MainFragmentRepositoryInterfac
 
 
 
-    private val _branches= MutableLiveData<List<Branch>>()
-    val branches: LiveData<List<Branch>> get()= _branches
+    private val _branches= MutableLiveData<MutableList<Branch>>()
+    val branches: LiveData<MutableList<Branch>> get()= _branches
 
 
     private val _oldPositionSelectedBranch= MutableLiveData<Int>()
@@ -30,29 +30,25 @@ class MainFragmentViewModel(private val mainRepo: MainFragmentRepositoryInterfac
 
 
     private val _selectedBranches= MutableLiveData<MutableList<Branch>>()
-  private  val selectedBranches: LiveData<MutableList<Branch>> get()= _selectedBranches
+   val selectedBranches: LiveData<MutableList<Branch>> get()= _selectedBranches
 
     private val _error= MutableLiveData<String>()
     val error: LiveData<String> get()= _error
 
 
 
-  private fun getCachedBranches()
+  fun getCachedBranches()
     {
         viewModelScope.launch(IO) {
            val cachedBranches =  mainRepo.getSelectedBranches()
             withContext(Main){
                 _cachedBranches.value = cachedBranches
             }
-
         }
-
-
     }
 
     fun setCacheBranches()
     {
-           getCachedBranches()
             viewModelScope.launch(IO) {
                 withContext(Main){
                     _cachedBranches.value?.get(0)?.code = enteredCode.value
@@ -70,7 +66,7 @@ class MainFragmentViewModel(private val mainRepo: MainFragmentRepositoryInterfac
         {
             val branchesResponse  = mainRepo.getBranches()
             withContext(Main){
-                _branches.value = branchesResponse
+                _branches.value = branchesResponse.toMutableList()
             }
         }
     }
@@ -78,15 +74,10 @@ class MainFragmentViewModel(private val mainRepo: MainFragmentRepositoryInterfac
 
     fun setOldSelectedBranch(position: Int)
     {
-
-        if( _oldPositionSelectedBranch.value != -1) {
-            _branches.value?.get(_oldPositionSelectedBranch.value!!)?.selected   = false
-        }
         _branches.value?.get(position)?.selected = !_branches.value?.get(position)?.selected!!
         if(position != _oldPositionSelectedBranch.value ) {
             _oldPositionSelectedBranch.value = position
         }
-
     }
 
 
@@ -94,9 +85,8 @@ class MainFragmentViewModel(private val mainRepo: MainFragmentRepositoryInterfac
 
     fun cacheSelectedBranches():Boolean
     {
-        if(oldPositionSelectedBranch.value!! != -1) {
-            _selectedBranches.value?.add(_branches.value?.get(oldPositionSelectedBranch.value!!)!!)
-        }
+
+        _selectedBranches.value?.add(_branches.value?.get(_oldPositionSelectedBranch.value!!)!!)
         return if(!selectedBranches.value?.isNullOrEmpty()!!){
             viewModelScope.launch(IO) {
                 mainRepo.addSelectedBranches(selectedBranches = selectedBranches.value!!)

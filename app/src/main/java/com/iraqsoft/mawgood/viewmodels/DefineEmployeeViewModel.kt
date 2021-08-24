@@ -21,6 +21,10 @@ class DefineEmployeeViewModel(private val defineEmployeeRepo:DefineEmployeeRepos
     private val _employees= MutableLiveData<GetResponse>()
     val employees: LiveData<GetResponse> get()= _employees
 
+    private val _oldEmployee= MutableLiveData<Int>()
+    val oldEmployee: LiveData<Int> get()= _oldEmployee
+
+
     private val _searchedList= MutableLiveData<List<GetResponseItem>>()
     val searchedList: LiveData<List<GetResponseItem>> get()= _searchedList
 
@@ -100,9 +104,12 @@ class DefineEmployeeViewModel(private val defineEmployeeRepo:DefineEmployeeRepos
         }
     }
 
-    private fun cacheEmployees()
+    fun setOldEmployee(position:Int)
     {
-
+        _employees.value?.get(position)?.selected = !_employees.value?.get(position)?.selected!!
+        if(position != _oldEmployee.value ) {
+            _oldEmployee.value = position
+        }
     }
 
     fun setDefaultSearchedList(){
@@ -110,6 +117,7 @@ class DefineEmployeeViewModel(private val defineEmployeeRepo:DefineEmployeeRepos
     }
 
     init {
+        _oldEmployee.value = -1
        getEmployees()
     }
 

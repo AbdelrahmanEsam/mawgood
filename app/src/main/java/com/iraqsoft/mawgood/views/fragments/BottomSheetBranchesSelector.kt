@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.iraqsoft.mawgood.R
 import com.iraqsoft.mawgood.databinding.BottomSheetBranchesSelectorBinding
 import com.iraqsoft.mawgood.databinding.FragmentEnterYourCodeBinding
+import com.iraqsoft.mawgood.util.SpacesItemDecoration
 import com.iraqsoft.mawgood.util.toast
 import com.iraqsoft.mawgood.views.activities.MainActivity2
 import com.iraqsoft.mawgood.views.adapters.BranchesAdapter
@@ -34,6 +35,7 @@ class BottomSheetBranchesSelector() : BottomSheetDialogFragment(),BranchesAdapte
         getBranchesFromDataBase()
         branchesObserver()
         errorObserver()
+        close()
 
         binding.confirmedButton.setOnClickListener {
           val cached =   (requireActivity() as MainActivity2).mainViewModel.cacheSelectedBranches()
@@ -41,6 +43,15 @@ class BottomSheetBranchesSelector() : BottomSheetDialogFragment(),BranchesAdapte
                 requireActivity().onBackPressed()
             }
         }
+    }
+
+    private fun close()
+    {
+
+        binding.closeImageView.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
+
     }
 
 
@@ -71,18 +82,20 @@ class BottomSheetBranchesSelector() : BottomSheetDialogFragment(),BranchesAdapte
         binding.branchesRecyclerView.apply {
             layoutManager = linear
           adapter = branchesAdapter
+            addItemDecoration(SpacesItemDecoration(10))
         }
 
     }
 
     override fun onBranchListener(position: Int) {
 
+        if( (requireActivity() as MainActivity2).mainViewModel.oldPositionSelectedBranch.value!! != -1) {
+            (requireActivity() as MainActivity2).mainViewModel.branches.value?.get((requireActivity() as MainActivity2).mainViewModel.oldPositionSelectedBranch.value!!)!!.selected = false
+            branchesAdapter.notifyItemChanged((requireActivity() as MainActivity2).mainViewModel.oldPositionSelectedBranch.value!!)
+        }
 
       (requireActivity() as MainActivity2).mainViewModel.setOldSelectedBranch(position)
-        (requireActivity() as MainActivity2).mainViewModel.oldPositionSelectedBranch.value?.let {
-            branchesAdapter.notifyItemChanged(it) }
         branchesAdapter.notifyItemChanged(position)
-
 
 
     }

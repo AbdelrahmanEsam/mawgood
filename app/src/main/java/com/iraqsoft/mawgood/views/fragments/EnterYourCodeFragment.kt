@@ -32,6 +32,14 @@ class EnterYourCodeFragment : Fragment() {
         nav = Navigation.findNavController(view)
        cacheButtonListener()
         back()
+
+    }
+
+    private fun back()
+    {
+        binding.backImageView.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
     }
 
     override fun onDestroyView() {
@@ -41,6 +49,7 @@ class EnterYourCodeFragment : Fragment() {
 
     private fun cacheButtonListener()
     {
+        (requireActivity() as MainActivity2).mainViewModel.getCachedBranches()
         binding.cacheButton.setOnClickListener {
             if(  (requireActivity() as MainActivity2).mainViewModel.enteredCode.value.isNullOrEmpty()){
                 toast(requireContext(),"")
@@ -73,12 +82,7 @@ class EnterYourCodeFragment : Fragment() {
     }
 
 
-    private fun back()
-    {
-        binding.backImageView.setOnClickListener {
-            requireActivity().onBackPressed()
-        }
-    }
+
 
 
 

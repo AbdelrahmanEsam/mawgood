@@ -28,8 +28,8 @@
             app:destination="@id/enterYourCodeFragment"
             />
         <action
-            android:id="@+id/action_mainFragment_to_bottomSheetEmpPrint"
-            app:destination="@id/bottomSheetEmpPrint" />
+            android:id="@+id/action_mainFragment_to_fingerPrintFromMain"
+            app:destination="@id/fingerPrintFromMain" />
     </fragment>
     <dialog
         android:id="@+id/bottomSheetCompanySelector"
@@ -89,4 +89,10 @@
             android:name="position"
             app:argType="integer" />
     </dialog>
+    <fragment
+        android:id="@+id/fingerPrintFromMain"
+        android:name="com.iraqsoft.mawgood.views.fragments.FingerPrintFromMain"
+        android:label="FingerPrintFromMain"
+        tools:layout="@layout/fragment_finger_print_from_main"
+        />
 </navigation>
