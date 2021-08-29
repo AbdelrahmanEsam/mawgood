@@ -53,7 +53,7 @@ class BottomSheetEmpPrint : BottomSheetDialogFragment() {
             directions = 1
         }
 
-        fingerprintViewModel.initFingerPrint(directions , emp)
+        fingerprintViewModel.initFingerPrint(emp)
         fingerprintViewModel.getFingerPrint()
 
         mViewDataBinding.closeImageView.setOnClickListener {

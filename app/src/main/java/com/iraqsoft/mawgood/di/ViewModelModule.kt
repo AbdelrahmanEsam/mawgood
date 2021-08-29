@@ -9,7 +9,11 @@ val viewModelModule = module {
 
     // Specific viewModel pattern to tell Koin how to build CountriesViewModel
     viewModel {
-        FingerPrintViewModel(get())
+        FingerPrintViewModel(fingerprintRepo = get())
+    }
+
+    viewModel {
+        MatchFingerprintViewModel(fingerprintRepo = get())
     }
 
 

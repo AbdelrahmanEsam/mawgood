@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.iraqsoft.mawgood.viewmodels.FingerPrintViewModel" />
+            type="com.iraqsoft.mawgood.viewmodels.MatchFingerprintViewModel" />
 
     </data>
 
@@ -23,8 +23,13 @@
             style="@style/cairo_regular_16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_20sdp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
             android:text="@{viewModel.fingerPrintError}"
-            android:textSize="@dimen/_15sdp"
+            android:textSize="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +46,7 @@
             android:background="@drawable/background_red"
             android:paddingStart="@dimen/_60sdp"
             android:paddingEnd="@dimen/_60sdp"
-            android:visibility="gone"
+            android:visibility="@{viewModel.fingerPrintMatch == 0  ? View.VISIBLE : View.GONE}"
             android:text="@string/print_not_correct"
             android:textSize="@dimen/_12sdp"
             app:layout_constraintBottom_toTopOf="@+id/fingerPrintImageView"
@@ -72,6 +77,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
+<!--        <TextView-->
+<!--            android:id="@+id/stayTextView"-->
+<!--            style="@style/cairo_regular_16"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="@dimen/_10sdp"-->
+<!--            android:visibility="@{viewModel.timerOn  ? View.VISIBLE : View.GONE}"-->
+<!--            android:text="@{viewModel.fingerStayCounter}"-->
+<!--            tools:text="3"-->
+<!--            android:textSize="@dimen/_17sdp"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/fingerPrintImageView"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent" />-->
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/fingerPrintImageView"
             android:layout_width="wrap_content"
@@ -86,6 +105,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/detailsConstraint"
             android:layout_width="0dp"
+            android:visibility="@{(viewModel.emp != null ) ? View.VISIBLE : View.GONE}"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_50sdp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -112,8 +132,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_115sdp"
                     android:background="@color/white"
-                    android:visibility="gone"
-
                     >
 
                     <androidx.appcompat.widget.AppCompatButton
@@ -137,6 +155,7 @@
                         android:layout_width="@dimen/_50sdp"
                         android:layout_height="@dimen/_50sdp"
                         android:layout_marginEnd="@dimen/_15sdp"
+                        app:srcCompat="@drawable/place_holder"
                         android:layout_marginBottom="@dimen/_15sdp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -149,25 +168,27 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/_15sdp"
-                        android:text="@string/user_name"
+                        android:text="@{viewModel.emp.displayName}"
+                        tools:text="اسم المستخدم"
                         android:textAlignment="viewEnd"
                         android:textColor="@color/blueBlack"
                         app:layout_constraintBottom_toBottomOf="@+id/employeeImageView"
                         app:layout_constraintEnd_toStartOf="@+id/employeeImageView"
                         app:layout_constraintTop_toTopOf="@+id/employeeImageView" />
 
-                    <TextView
-                        android:id="@+id/phoneTextView"
-                        style="@style/cairo_regular_16"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/phone"
-                        android:textAlignment="viewEnd"
-                        android:textColor="@color/blueBlack"
-                        app:layout_constraintBottom_toBottomOf="@+id/employeeImageView"
-                        app:layout_constraintEnd_toEndOf="@+id/nameTextView"
-                        app:layout_constraintStart_toStartOf="@+id/nameTextView"
-                        app:layout_constraintTop_toBottomOf="@+id/nameTextView" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/phoneTextView"-->
+<!--                        style="@style/cairo_regular_16"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="@{viewModel.emp.phone}"-->
+<!--                        tools:text="01003316096"-->
+<!--                        android:textAlignment="viewEnd"-->
+<!--                        android:textColor="@color/blueBlack"-->
+<!--                        app:layout_constraintBottom_toBottomOf="@+id/employeeImageView"-->
+<!--                        app:layout_constraintEnd_toEndOf="@+id/nameTextView"-->
+<!--                        app:layout_constraintStart_toStartOf="@+id/nameTextView"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/nameTextView" />-->
 
 
                     <androidx.appcompat.widget.AppCompatImageView

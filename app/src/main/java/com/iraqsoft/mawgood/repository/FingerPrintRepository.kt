@@ -12,8 +12,14 @@ import kotlinx.coroutines.withContext
 
 class FingerPrintRepository(private val api: ApiProvider,private val dao:EmployeesDao) :FingerPrintRpoInterface {
     override suspend fun cashSingleEmp(emp: GetResponseItem?) {
-        if(emp != null )
+        Log.e("cashSingleItem" , "start Function")
+        if(emp != null ) {
+            Log.e("cashSingleItem" , "emp != null")
+            dao.deleteEmp(emp)
             dao.addSingleEmp(emp)
+        }else{
+            Log.e("cashSingleItem" , "emp == null")
+        }
     }
 
     override suspend fun getEmps(): List<GetResponseItem> {

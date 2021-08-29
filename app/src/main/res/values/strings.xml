@@ -23,6 +23,6 @@
     <string name="your_code">الكود الخاص بك</string>
     <string name="enter_your_code">ادخل الكود الخاص بك</string>
     <string name="configs">الاعدادات</string>
-    <string name="print_not_correct">البصمة عير صحيحة</string>
+    <string name="print_not_correct">البصمة غير صحيحة</string>
     <string name="phone">رقم الهاتف</string>
 </resources>
