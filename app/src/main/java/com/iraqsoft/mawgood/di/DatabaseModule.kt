@@ -4,10 +4,7 @@ package com.iraqsoft.mawgood.di
 //import com.iraqsoft.mawgood.db.CountriesDatabase
 import android.app.Application
 import androidx.room.Room
-import com.iraqsoft.mawgood.db.EmployeesDao
-import com.iraqsoft.mawgood.db.UserDatabase
-import com.iraqsoft.mawgood.db.UserDao
-import com.iraqsoft.mawgood.db.SelectedBranchesDao
+import com.iraqsoft.mawgood.db.*
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 
@@ -31,12 +28,17 @@ val databaseModule = module {
         return  database.employeesDao
     }
 
+    fun provideEmpNeedsToBeSyncedDao(database: UserDatabase): EmpNeedsToBeSyncedDao {
+        return  database.empNeedsToBeSynced
+    }
+
 
 //
     single { provideUsersDatabase(androidApplication()) }
     single { provideUsersDao(get()) }
     single { provideBranchesDao(get()) }
     single { provideEmployeesDao(get()) }
+    single { provideEmpNeedsToBeSyncedDao(get()) }
 
 
 }

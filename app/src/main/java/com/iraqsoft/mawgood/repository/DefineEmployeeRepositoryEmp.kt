@@ -2,9 +2,11 @@ package com.iraqsoft.mawgood.repository
 
 import android.util.Log
 import com.iraqsoft.mawgood.ApiProvider
+import com.iraqsoft.mawgood.db.EmpNeedsToBeSyncedDao
 import com.iraqsoft.mawgood.db.EmployeesDao
 import com.iraqsoft.mawgood.db.SelectedBranchesDao
 import com.iraqsoft.mawgood.db.UserDao
+import com.iraqsoft.mawgood.db.model.EmpNeedsToBeSynced
 import com.iraqsoft.mawgood.db.model.GetResponse
 import com.iraqsoft.mawgood.db.model.GetResponseItem
 import com.iraqsoft.mawgood.util.AppResult
@@ -13,7 +15,8 @@ import com.iraqsoft.mawgood.util.Utils.handleSuccess
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class DefineEmployeeRepositoryEmp(private val api : ApiProvider, private val userDao : UserDao, private val branchesDao : SelectedBranchesDao, private val employeesDao:EmployeesDao):DefineEmployeeRepositoryInterface {
+class DefineEmployeeRepositoryEmp(private val api : ApiProvider, private val userDao : UserDao, private val branchesDao : SelectedBranchesDao
+, private val employeesDao:EmployeesDao):DefineEmployeeRepositoryInterface {
     override suspend fun getSelectedBranch(): String {
         return branchesDao.getSelectedBranches()[0]._id
     }
@@ -52,6 +55,7 @@ class DefineEmployeeRepositoryEmp(private val api : ApiProvider, private val use
     override suspend fun cacheEmployees(cache: List<GetResponseItem>) {
         employeesDao.addSelectedEmployees(cache)
     }
+
 
 
 }

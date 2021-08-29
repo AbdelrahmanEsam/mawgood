@@ -2,15 +2,18 @@ package com.iraqsoft.mawgood.repository
 
 import android.util.Log
 import com.iraqsoft.mawgood.ApiProvider
+import com.iraqsoft.mawgood.db.EmpNeedsToBeSyncedDao
 import com.iraqsoft.mawgood.db.EmployeesDao
 import com.iraqsoft.mawgood.db.model.CheckInAndOutResponse
+import com.iraqsoft.mawgood.db.model.EmpNeedsToBeSynced
 import com.iraqsoft.mawgood.db.model.GetResponseItem
 import com.iraqsoft.mawgood.util.AppResult
+import com.iraqsoft.mawgood.util.NetworkManager.isOnline
 import com.iraqsoft.mawgood.util.Utils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class FingerPrintRepository(private val api: ApiProvider,private val dao:EmployeesDao) :FingerPrintRpoInterface {
+class FingerPrintRepository(private val api: ApiProvider,private val dao:EmployeesDao,private val empNeedToBeSynced:EmpNeedsToBeSyncedDao) :FingerPrintRpoInterface {
     override suspend fun cashSingleEmp(emp: GetResponseItem?) {
         Log.e("cashSingleItem" , "start Function")
         if(emp != null ) {
@@ -37,11 +40,16 @@ class FingerPrintRepository(private val api: ApiProvider,private val dao:Employe
                     Utils.handleSuccess(response)
                 }
             }else{
+
                 Utils.handleApiError(response)
             }
         }catch (e: Exception){
             return  AppResult.Error(e)
         }
+    }
+
+    override suspend fun cacheCheck(emp: EmpNeedsToBeSynced) {
+        empNeedToBeSynced.addSingleEmp(emp)
     }
 
 }

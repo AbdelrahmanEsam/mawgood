@@ -33,6 +33,7 @@ class DefineEmployeeFragment : Fragment(R.layout.fragment_define_empolyee) ,Empl
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         nav = Navigation.findNavController(view)
+        employeesAdapter()
         branchesObserver()
         queryObserver()
         back()
@@ -60,18 +61,17 @@ class DefineEmployeeFragment : Fragment(R.layout.fragment_define_empolyee) ,Empl
     private fun branchesObserver()
     {
         defineViewModel.searchedList.observe(viewLifecycleOwner,{
-            employeeAdapter= EmployeesAdapter(requireContext(),this)
             employeeAdapter.setDataAdapter(it)
-            employeesAdapter()
+            binding.employeeRecyclerView.adapter = employeeAdapter
         })
     }
 
 
     private fun employeesAdapter() {
+        employeeAdapter= EmployeesAdapter(requireContext(),this)
         val linear = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.employeeRecyclerView.apply {
             layoutManager = linear
-            adapter = employeeAdapter
             addItemDecoration(SpacesItemDecoration(20))
         }
 

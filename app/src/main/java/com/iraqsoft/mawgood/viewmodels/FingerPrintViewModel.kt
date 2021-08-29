@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fgtit.app.Fingerprint
 import com.fgtit.fpcore.FPMatch
+import com.iraqsoft.mawgood.db.model.EmpNeedsToBeSynced
 import com.iraqsoft.mawgood.db.model.GetResponseItem
 import com.iraqsoft.mawgood.repository.FingerPrintRpoInterface
 import com.iraqsoft.mawgood.util.AppResult
@@ -44,6 +45,15 @@ class FingerPrintViewModel(private val fingerprintRepo: FingerPrintRpoInterface)
         }
 
         setHandler()
+    }
+
+    fun cacheEmpNeedToBeSynced(emp:EmpNeedsToBeSynced)
+    {
+        // tested and it's OK
+
+        viewModelScope.launch(IO) {
+            fingerprintRepo.cacheCheck(emp)
+        }
     }
 
     private fun setHandler(): String {
@@ -128,4 +138,6 @@ class FingerPrintViewModel(private val fingerprintRepo: FingerPrintRpoInterface)
             }
         }
     }
+
+
 }

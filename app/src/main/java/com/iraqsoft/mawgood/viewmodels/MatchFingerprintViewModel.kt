@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fgtit.app.Fingerprint
 import com.fgtit.fpcore.FPMatch
+import com.iraqsoft.mawgood.db.model.EmpNeedsToBeSynced
 import com.iraqsoft.mawgood.db.model.GetResponseItem
 import com.iraqsoft.mawgood.repository.FingerPrintRpoInterface
 import com.iraqsoft.mawgood.util.AppResult
@@ -17,6 +18,21 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+
+import android.R.attr.name
+import java.text.SimpleDateFormat
+import java.util.*
+import java.util.Locale
+
+import android.R.attr.name
+import android.R.attr.name
+
+
+
+
+
+
+
 
 class MatchFingerprintViewModel(private val fingerprintRepo: FingerPrintRpoInterface) : ViewModel() {
 
@@ -115,6 +131,9 @@ class MatchFingerprintViewModel(private val fingerprintRepo: FingerPrintRpoInter
                                                 Log.e("check_emp" , "check emp success")
                                             }
                                             is AppResult.Error -> {
+                                                val currentDate = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
+                                                val currentTime = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())
+                                                fingerprintRepo.cacheCheck(EmpNeedsToBeSynced(it._id, it.displayName, currentDate, currentTime))
                                                 Log.e("tag",response.exception.toString())
                                             }
                                         }

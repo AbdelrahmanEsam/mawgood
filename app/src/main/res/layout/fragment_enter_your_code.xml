@@ -115,6 +115,38 @@
             app:layout_constraintStart_toStartOf="@+id/emailInputLayout"
             app:layout_constraintTop_toBottomOf="@+id/emailInputLayout" />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/sync"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:visibility="gone"
+            android:text="sync"
+            app:layout_constraintEnd_toEndOf="@+id/cacheButton"
+            app:layout_constraintTop_toBottomOf="@+id/cacheButton" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/employees"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="Emp"
+            app:layout_constraintBottom_toBottomOf="@+id/sync"
+            app:layout_constraintStart_toStartOf="@+id/cacheButton"
+            app:layout_constraintTop_toTopOf="@+id/sync" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/syncNeededEmployees"
+            android:visibility="gone"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/sync"
+            app:layout_constraintStart_toStartOf="@+id/employees"
+            app:layout_constraintTop_toBottomOf="@+id/sync" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

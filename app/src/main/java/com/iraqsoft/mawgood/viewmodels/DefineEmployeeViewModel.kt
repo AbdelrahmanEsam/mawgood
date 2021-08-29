@@ -25,6 +25,8 @@ class DefineEmployeeViewModel(private val defineEmployeeRepo:DefineEmployeeRepos
     val oldEmployee: LiveData<Int> get()= _oldEmployee
 
 
+
+
     private val _searchedList= MutableLiveData<List<GetResponseItem>>()
     val searchedList: LiveData<List<GetResponseItem>> get()= _searchedList
 
@@ -115,6 +117,8 @@ class DefineEmployeeViewModel(private val defineEmployeeRepo:DefineEmployeeRepos
     fun setDefaultSearchedList(){
         _searchedList.value = _employees.value
     }
+
+
 
     init {
         _oldEmployee.value = -1

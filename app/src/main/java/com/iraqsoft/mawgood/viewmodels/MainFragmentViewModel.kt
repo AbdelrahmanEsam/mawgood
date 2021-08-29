@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.iraqsoft.mawgood.db.model.Branch
+import com.iraqsoft.mawgood.db.model.EmpNeedsToBeSynced
 import com.iraqsoft.mawgood.repository.MainFragmentRepositoryInterface
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -33,6 +34,10 @@ class MainFragmentViewModel(private val mainRepo: MainFragmentRepositoryInterfac
 
     private val _selectedBranches= MutableLiveData<MutableList<Branch>>()
    val selectedBranches: LiveData<MutableList<Branch>> get()= _selectedBranches
+
+
+    private val _empNeedsToBeSynced = MutableLiveData<MutableList<EmpNeedsToBeSynced>>()
+    val empNeedsToBeSynced: LiveData<MutableList<EmpNeedsToBeSynced>> get()= _empNeedsToBeSynced
 
     private val _error= MutableLiveData<String>()
     val error: LiveData<String> get()= _error
@@ -101,6 +106,14 @@ class MainFragmentViewModel(private val mainRepo: MainFragmentRepositoryInterfac
             false
         }
 
+    }
+
+
+    fun getEmployeesNeedsToBeSynced()
+    {
+        viewModelScope.launch(IO) {
+            _empNeedsToBeSynced.postValue(mainRepo.getEmployeesNeedsToBeSynced().toMutableList())
+        }
     }
 
 

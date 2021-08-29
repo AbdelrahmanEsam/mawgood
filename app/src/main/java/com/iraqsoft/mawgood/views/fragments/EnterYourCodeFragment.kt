@@ -8,15 +8,18 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.iraqsoft.mawgood.R
 import com.iraqsoft.mawgood.databinding.FragmentEnterYourCodeBinding
+import com.iraqsoft.mawgood.util.SpacesItemDecoration
 import com.iraqsoft.mawgood.util.toast
 import com.iraqsoft.mawgood.views.activities.MainActivity2
+import com.iraqsoft.mawgood.views.adapters.EmployeesNeedsToBeSyncedAdapter
 
 class EnterYourCodeFragment : Fragment() {
 
-
     private lateinit var  binding : FragmentEnterYourCodeBinding
+    private lateinit var employeeAdapter: EmployeesNeedsToBeSyncedAdapter
     private lateinit var nav: NavController
 
 
@@ -30,17 +33,35 @@ class EnterYourCodeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         nav = Navigation.findNavController(view)
-       cacheButtonListener()
-        back()
+        setNeedToBeSyncedRecycler()
+        buttonsListeners()
+        needToBeSyncedObserver()
+
 
     }
 
-    private fun back()
+
+
+    private fun needToBeSyncedObserver()
     {
-        binding.backImageView.setOnClickListener {
-            requireActivity().onBackPressed()
+        (requireActivity() as MainActivity2).mainViewModel.empNeedsToBeSynced.observe(viewLifecycleOwner,{
+
+            employeeAdapter.setDataAdapter(it)
+            binding.syncNeededEmployees?.adapter = employeeAdapter
+        })
+
+    }
+
+    private fun setNeedToBeSyncedRecycler()
+    {employeeAdapter= EmployeesNeedsToBeSyncedAdapter(requireContext())
+        val linear = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        binding.syncNeededEmployees?.apply {
+            layoutManager = linear
+            addItemDecoration(SpacesItemDecoration(20))
         }
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -66,8 +87,10 @@ class EnterYourCodeFragment : Fragment() {
                 }else{
                     if (  (requireActivity() as MainActivity2).mainViewModel.cachedBranches.value?.get(0)?.code
                         ==(requireActivity() as MainActivity2).mainViewModel.enteredCode.value){
-
-                          nav.navigate(R.id.action_enterYourCodeFragment_to_defineEmployeeFragment)
+                        (requireActivity() as MainActivity2).mainViewModel.getEmployeesNeedsToBeSynced()
+                         binding.employees?.visibility = View.VISIBLE
+                        binding.sync?.visibility  = View.VISIBLE
+                        binding.syncNeededEmployees?.visibility= View.VISIBLE
                     }else{
 
                         // to do
@@ -79,6 +102,33 @@ class EnterYourCodeFragment : Fragment() {
 
 
         }
+    }
+
+    private fun buttonsListeners()
+    {
+        employeesButtonListener()
+        syncButtonListener()
+        cacheButtonListener()
+        backListener()
+    }
+
+    private fun backListener()
+    {
+        binding.backImageView.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
+    }
+
+    private fun employeesButtonListener()
+    {
+        binding.employees?.setOnClickListener {
+            nav.navigate(R.id.action_enterYourCodeFragment_to_defineEmployeeFragment)
+        }
+    }
+
+    private fun syncButtonListener()
+    {
+        //to do
     }
 
 

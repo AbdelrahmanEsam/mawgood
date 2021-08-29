@@ -1,5 +1,6 @@
 package com.iraqsoft.mawgood.repository
 
+import com.iraqsoft.mawgood.db.model.EmpNeedsToBeSynced
 import com.iraqsoft.mawgood.db.model.GetResponse
 import com.iraqsoft.mawgood.db.model.GetResponseItem
 import com.iraqsoft.mawgood.db.model.LoginCompanyResponse
@@ -18,6 +19,8 @@ interface DefineEmployeeRepositoryInterface {
 
 
     suspend fun cacheEmployees(cache :List<GetResponseItem>)
+
+
 
 
 
