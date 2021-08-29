@@ -12,12 +12,13 @@ import com.iraqsoft.mawgood.databinding.FragmentFingerPrintFromMainBinding
 import com.iraqsoft.mawgood.databinding.FragmentFingerprintTestBinding
 import com.iraqsoft.mawgood.util.toast
 import com.iraqsoft.mawgood.viewmodels.FingerPrintViewModel
+import com.iraqsoft.mawgood.viewmodels.MatchFingerprintViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class FingerPrintFromMain : Fragment() {
-    private val fingerPrintViewModel by viewModel<FingerPrintViewModel>()
+    private val fingerPrintViewModel by viewModel<MatchFingerprintViewModel>()
     private lateinit var mViewDataBinding: FragmentFingerPrintFromMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,11 +38,15 @@ class FingerPrintFromMain : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mViewDataBinding.fingerPrintImageView.setOnClickListener {
-            mViewDataBinding.detailsConstraint.visibility = View.VISIBLE
+        fingerPrintViewModel.initFingerPrint()
+        fingerPrintViewModel.getFingerPrint()
+
+        mViewDataBinding.closeImageView.setOnClickListener {
+            requireActivity().onBackPressed()
         }
 
     }
+
 
 
 }

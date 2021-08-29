@@ -1,9 +1,6 @@
 package com.iraqsoft.mawgood.db
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.iraqsoft.mawgood.db.model.GetResponseItem
 
 @Dao
@@ -17,5 +14,11 @@ interface EmployeesDao {
 
     @Insert(onConflict =  OnConflictStrategy.REPLACE)
     fun addSingleEmp(emp : GetResponseItem?)
+
+    @Update
+    fun updateEmp(emp : GetResponseItem?)
+
+    @Delete
+    fun deleteEmp(emp : GetResponseItem?)
 
 }
