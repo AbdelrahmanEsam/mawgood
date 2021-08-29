@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.iraqsoft.mawgood.R
 import com.iraqsoft.mawgood.databinding.FragmentFingerprintTestBinding
@@ -62,6 +63,13 @@ class BottomSheetEmpPrint : BottomSheetDialogFragment() {
         mViewDataBinding.fingerPrintImageView.setOnClickListener {
             mViewDataBinding.doneButton.visibility = View.VISIBLE
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        //this forces the sheet to appear at max height even on landscape
+        val behavior = BottomSheetBehavior.from(requireView().parent as View)
+        behavior.state = BottomSheetBehavior.STATE_EXPANDED
     }
 
 

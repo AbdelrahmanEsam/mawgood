@@ -15,6 +15,8 @@ class MainFragmentViewModel(private val mainRepo: MainFragmentRepositoryInterfac
 
      val enteredCode= MutableLiveData<String>()
 
+
+
     private val _cachedBranches= MutableLiveData<MutableList<Branch>>()
     val cachedBranches: LiveData<MutableList<Branch>> get()= _cachedBranches
 

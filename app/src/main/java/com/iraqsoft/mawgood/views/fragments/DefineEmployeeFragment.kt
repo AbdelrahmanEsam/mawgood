@@ -6,21 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.viewbinding.library.fragment.viewBinding
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.iraqsoft.mawgood.R
 import com.iraqsoft.mawgood.databinding.FragmentDefineEmpolyeeBinding
-import com.iraqsoft.mawgood.databinding.FragmentEnterYourCodeBinding
-import com.iraqsoft.mawgood.databinding.FragmentMainBinding
 import com.iraqsoft.mawgood.util.SpacesItemDecoration
 import com.iraqsoft.mawgood.viewmodels.DefineEmployeeViewModel
-import com.iraqsoft.mawgood.viewmodels.MainFragmentViewModel
-import com.iraqsoft.mawgood.views.activities.MainActivity2
-import com.iraqsoft.mawgood.views.adapters.BranchesAdapter
 import com.iraqsoft.mawgood.views.adapters.EmployeesAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -43,8 +36,26 @@ class DefineEmployeeFragment : Fragment(R.layout.fragment_define_empolyee) ,Empl
         branchesObserver()
         queryObserver()
         back()
+        listenToFragmentCallBack()
+
 
     }
+
+    private fun listenToFragmentCallBack()
+    {
+        nav.currentBackStackEntry?.savedStateHandle?.getLiveData<String>("key")?.observe(
+            viewLifecycleOwner) {
+            setSelectedEmpToDefault()
+        }
+    }
+
+    private fun setSelectedEmpToDefault()
+    {
+     if (defineViewModel.oldEmployee.value != -1){
+         defineViewModel.oldEmployee.value?.let { employeeAdapter.setSelectedItemToDefault(it) }
+     }
+    }
+
 
     private fun branchesObserver()
     {

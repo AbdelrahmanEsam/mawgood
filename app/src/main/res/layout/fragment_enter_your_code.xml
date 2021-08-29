@@ -8,10 +8,14 @@
             name="viewModel"
             type="com.iraqsoft.mawgood.viewmodels.MainFragmentViewModel" />
     </data>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/semiWhite"
         tools:context=".views.fragments.EnterYourCodeFragment">
 
@@ -113,4 +117,5 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>

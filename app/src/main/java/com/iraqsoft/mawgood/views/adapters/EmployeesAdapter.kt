@@ -1,6 +1,7 @@
 package com.iraqsoft.mawgood.views.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -75,6 +76,12 @@ class EmployeesAdapter(val context: Context, private val listener : OnEmployeeLi
     fun setDataAdapter(data:List<GetResponseItem>) {
         this.data = data
         notifyDataSetChanged()
+    }
+
+    fun setSelectedItemToDefault(position:Int){
+        data[position].selected = false
+        notifyItemChanged(position)
+        Log.d("abdo","tep")
     }
 
     interface OnEmployeeListener

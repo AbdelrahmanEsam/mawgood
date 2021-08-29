@@ -1,5 +1,6 @@
 package com.iraqsoft.mawgood.views.fragments
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.viewbinding.library.dialogfragment.viewBinding
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.iraqsoft.mawgood.R
 import com.iraqsoft.mawgood.databinding.PrintBottomSheetBinding
@@ -39,8 +41,21 @@ class PrintBottomSheet : BottomSheetDialogFragment() {
 
     }
 
+    override fun onStart() {
+        super.onStart()
+        //this forces the sheet to appear at max height even on landscape
+        val behavior = BottomSheetBehavior.from(requireView().parent as View)
+        behavior.state = BottomSheetBehavior.STATE_EXPANDED
+    }
+
     private fun setData(){
       binding.nameTextView.text = args.selectedEmp[args.position].displayName
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        nav.previousBackStackEntry?.savedStateHandle?.set("key", "yep")
+        nav.popBackStack()
     }
 
 
