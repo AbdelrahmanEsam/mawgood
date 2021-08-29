@@ -24,12 +24,13 @@
         <entry key="..\:/mawgood/app/src/main/res/drawable/search_back_white.xml" value="0.11805555555555555" />
         <entry key="..\:/mawgood/app/src/main/res/drawable/search_view_background.xml" value="0.11805555555555555" />
         <entry key="..\:/mawgood/app/src/main/res/drawable/sheet_background.xml" value="0.11805555555555555" />
+        <entry key="..\:/mawgood/app/src/main/res/layout-land/fragment_enter_your_code.xml" value="0.2953125" />
         <entry key="..\:/mawgood/app/src/main/res/layout/activity_main.xml" value="0.1814814814814815" />
         <entry key="..\:/mawgood/app/src/main/res/layout/bottom_sheet_branches_selector.xml" value="0.1" />
         <entry key="..\:/mawgood/app/src/main/res/layout/branch_bottom_layout.xml" value="0.1" />
         <entry key="..\:/mawgood/app/src/main/res/layout/employee_custom_layout.xml" value="0.1814814814814815" />
         <entry key="..\:/mawgood/app/src/main/res/layout/fragment_define_empolyee.xml" value="0.1" />
-        <entry key="..\:/mawgood/app/src/main/res/layout/fragment_enter_your_code.xml" value="0.1" />
+        <entry key="..\:/mawgood/app/src/main/res/layout/fragment_enter_your_code.xml" value="0.16" />
         <entry key="..\:/mawgood/app/src/main/res/layout/fragment_exception.xml" value="0.1" />
         <entry key="..\:/mawgood/app/src/main/res/layout/fragment_finger_print_from_main.xml" value="0.21" />
         <entry key="..\:/mawgood/app/src/main/res/layout/fragment_fingerprint_test.xml" value="0.1814814814814815" />
