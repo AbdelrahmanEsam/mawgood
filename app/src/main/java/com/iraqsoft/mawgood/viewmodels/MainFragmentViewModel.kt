@@ -130,7 +130,8 @@ class MainFragmentViewModel(private val mainRepo: MainFragmentRepositoryInterfac
                     mainRepo.deleteEmp(emp)
 
                 } else {
-                    Log.d("responseCode", response.code().toString())
+                    Log.d("responseCode", response.errorBody().toString())
+                    Log.d("responseCode", response.body().toString())
                 }
 
 

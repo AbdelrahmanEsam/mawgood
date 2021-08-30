@@ -28,4 +28,5 @@
     <color name="second">#2196F3</color>
     <color name="transparent">@android:color/transparent</color>
     <color name="mtrl_textinput_default_box_stroke_color">@color/borderWhite</color>
+    <color name="gif_background">#293538</color>
 </resources>

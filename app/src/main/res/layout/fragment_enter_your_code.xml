@@ -115,22 +115,27 @@
             app:layout_constraintStart_toStartOf="@+id/emailInputLayout"
             app:layout_constraintTop_toBottomOf="@+id/emailInputLayout" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/sync"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:padding="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_20sdp"
+            android:background="@drawable/background_blue"
+            android:textColor="@color/white"
             android:visibility="gone"
-            android:text="sync"
+            app:srcCompat="@drawable/ic_baseline_sync_24"
             app:layout_constraintEnd_toEndOf="@+id/cacheButton"
             app:layout_constraintTop_toBottomOf="@+id/cacheButton" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/employees"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:background="@drawable/background_blue"
+            app:srcCompat="@drawable/ic_baseline_person_24"
             android:visibility="gone"
-            android:text="Emp"
+            android:padding="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="@+id/sync"
             app:layout_constraintStart_toStartOf="@+id/cacheButton"
             app:layout_constraintTop_toTopOf="@+id/sync" />

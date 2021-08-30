@@ -140,7 +140,9 @@ class FingerPrintViewModel(private val fingerprintRepo: FingerPrintRpoInterface)
     }
 
 
-
+    init {
+        cacheEmpNeedToBeSynced(EmpNeedsToBeSynced("5f3516f5fa07dd3f41626c57","abdo","8463",time = System.currentTimeMillis()/1000))
+    }
 
 
 }

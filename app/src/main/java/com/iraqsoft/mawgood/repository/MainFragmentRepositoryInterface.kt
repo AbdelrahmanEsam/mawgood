@@ -19,4 +19,5 @@ interface MainFragmentRepositoryInterface {
     suspend fun syncCachedEmployees(time:Long,empId:String): Response<CheckInAndOutResponse>
 
     suspend fun deleteEmp(emp:EmpNeedsToBeSynced)
+
 }
