@@ -10,6 +10,7 @@ import com.iraqsoft.mawgood.db.EmployeesDao
 import com.iraqsoft.mawgood.db.SelectedBranchesDao
 import com.iraqsoft.mawgood.db.UserDao
 import com.iraqsoft.mawgood.repository.*
+import com.iraqsoft.mawgood.util.CheckConnection
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
@@ -29,14 +30,14 @@ val repositoryModule = module {
         return DefineEmployeeRepositoryEmp(api,userDao,selectedBranchesDao,employeesDao)
     }
 
-    fun provideFingerPrintRepo(api: ApiProvider,employeesDao: EmployeesDao,empNeedsToBeSyncedDao: EmpNeedsToBeSyncedDao): FingerPrintRpoInterface {
-        return FingerPrintRepository(api,employeesDao,empNeedsToBeSyncedDao)
+    fun provideFingerPrintRepo(api: ApiProvider,employeesDao: EmployeesDao,empNeedsToBeSyncedDao: EmpNeedsToBeSyncedDao,checkConnection: CheckConnection): FingerPrintRpoInterface {
+        return FingerPrintRepository(api,employeesDao,empNeedsToBeSyncedDao,checkConnection)
     }
 
     single { provideLoginRepo(get(), get()) }
     single { provideMainFragmentRepo(get(),get(),get(),get()) }
     single { provideDefineEmployeeRepo(get(),get(),get(),get()) }
-    single { provideFingerPrintRepo(get(),get(),get())}
+    single { provideFingerPrintRepo(get(),get(),get(),get())}
 
 
 }

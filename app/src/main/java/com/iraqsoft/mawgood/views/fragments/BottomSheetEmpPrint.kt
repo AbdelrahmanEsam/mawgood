@@ -48,8 +48,8 @@ class BottomSheetEmpPrint : BottomSheetDialogFragment() {
         mViewDataBinding.viewModel = fingerprintViewModel
         var emp : GetResponseItem? = null
         var directions = 2 ;
-        if(args?.position != -1 ) {
-            emp = args?.selectedEmp!![args?.position]
+        if(args.position != -1 ) {
+            emp = args.selectedEmp!![args.position]
             directions = 1
         }
 

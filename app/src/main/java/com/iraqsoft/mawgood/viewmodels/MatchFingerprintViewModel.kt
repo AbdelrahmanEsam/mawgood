@@ -17,21 +17,10 @@ import com.iraqsoft.mawgood.util.AppResult
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
-import android.R.attr.name
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.Locale
-
-import android.R.attr.name
-import android.R.attr.name
-
-
-
-
-
-
 
 
 class MatchFingerprintViewModel(private val fingerprintRepo: FingerPrintRpoInterface) : ViewModel() {
@@ -126,7 +115,7 @@ class MatchFingerprintViewModel(private val fingerprintRepo: FingerPrintRpoInter
                                         fingerPrintMatch.postValue(1)
                                         status.postValue("تمت المعالجة بنجاح")
                                         emp.postValue(it)
-                                        when(val response = fingerprintRepo.empCheck(empId = it._id)){
+                                        when(val response = fingerprintRepo.empCheck(empId = it)){
                                             is AppResult.Success -> {
                                                 Log.e("check_emp" , "check emp success")
                                             }
