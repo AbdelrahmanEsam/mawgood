@@ -82,9 +82,7 @@ dependencies {
 
     //okhttp
     implementation "com.squareup.okhttp3:logging-interceptor:3.12.12"
-    implementation ("com.squareup.okhttp3:okhttp:3.12.12"){
-        force = true //API 19 support
-    }
+    implementation "com.squareup.okhttp3:okhttp:3.12.12"
 
 
 
@@ -150,4 +148,7 @@ dependencies {
     implementation 'com.github.yogacp:android-viewbinding:1.0.3'
 
     implementation 'com.google.code.gson:gson:2.8.7'
+
+
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.23'
 }

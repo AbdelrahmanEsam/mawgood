@@ -25,4 +25,5 @@
     <string name="configs">الاعدادات</string>
     <string name="print_not_correct">البصمة غير صحيحة</string>
     <string name="phone">رقم الهاتف</string>
+    <string name="print_is_not_correct">البصمة عير صحيحة</string>
 </resources>

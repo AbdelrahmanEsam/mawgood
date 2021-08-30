@@ -1,4 +1,5 @@
 package com.iraqsoft.mawgood.viewmodels
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -112,7 +113,31 @@ class MainFragmentViewModel(private val mainRepo: MainFragmentRepositoryInterfac
     fun getEmployeesNeedsToBeSynced()
     {
         viewModelScope.launch(IO) {
-            _empNeedsToBeSynced.postValue(mainRepo.getEmployeesNeedsToBeSynced().toMutableList())
+           val response = mainRepo.getEmployeesNeedsToBeSynced().toMutableList()
+
+            _empNeedsToBeSynced.postValue(response)
+            Log.d("getEmployeesNeeds", _empNeedsToBeSynced.value?.size.toString())
+        }
+    }
+
+    fun syncNeedToBeCachedEmployees() {
+
+        viewModelScope.launch(IO) {
+            for (emp in _empNeedsToBeSynced.value!!) {
+                val response = mainRepo.syncCachedEmployees(empId = emp._id, time = emp.time!!)
+                if (response.isSuccessful) {
+                    Log.d("responseCode", "done yeeeeh")
+                    mainRepo.deleteEmp(emp)
+
+                } else {
+                    Log.d("responseCode", response.code().toString())
+                }
+
+
+            }
+
+        }.invokeOnCompletion {
+            getEmployeesNeedsToBeSynced()
         }
     }
 

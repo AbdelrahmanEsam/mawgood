@@ -23,7 +23,7 @@ class EnterYourCodeFragment : Fragment() {
     private lateinit var nav: NavController
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_enter_your_code, container, false)
         binding.viewModel = (requireActivity() as MainActivity2).mainViewModel
@@ -46,8 +46,11 @@ class EnterYourCodeFragment : Fragment() {
     {
         (requireActivity() as MainActivity2).mainViewModel.empNeedsToBeSynced.observe(viewLifecycleOwner,{
 
+            if (it.isEmpty()){
+                binding.circularProgressIndicator.visibility = View.GONE
+            }
             employeeAdapter.setDataAdapter(it)
-            binding.syncNeededEmployees?.adapter = employeeAdapter
+            binding.syncNeededEmployees.adapter = employeeAdapter
         })
 
     }
@@ -55,7 +58,7 @@ class EnterYourCodeFragment : Fragment() {
     private fun setNeedToBeSyncedRecycler()
     {employeeAdapter= EmployeesNeedsToBeSyncedAdapter(requireContext())
         val linear = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        binding.syncNeededEmployees?.apply {
+        binding.syncNeededEmployees.apply {
             layoutManager = linear
             addItemDecoration(SpacesItemDecoration(20))
         }
@@ -88,9 +91,9 @@ class EnterYourCodeFragment : Fragment() {
                     if (  (requireActivity() as MainActivity2).mainViewModel.cachedBranches.value?.get(0)?.code
                         ==(requireActivity() as MainActivity2).mainViewModel.enteredCode.value){
                         (requireActivity() as MainActivity2).mainViewModel.getEmployeesNeedsToBeSynced()
-                         binding.employees?.visibility = View.VISIBLE
-                        binding.sync?.visibility  = View.VISIBLE
-                        binding.syncNeededEmployees?.visibility= View.VISIBLE
+                         binding.employees.visibility = View.VISIBLE
+                        binding.sync.visibility  = View.VISIBLE
+                        binding.syncNeededEmployees.visibility= View.VISIBLE
                     }else{
 
                         // to do
@@ -121,14 +124,17 @@ class EnterYourCodeFragment : Fragment() {
 
     private fun employeesButtonListener()
     {
-        binding.employees?.setOnClickListener {
+        binding.employees.setOnClickListener {
             nav.navigate(R.id.action_enterYourCodeFragment_to_defineEmployeeFragment)
         }
     }
 
     private fun syncButtonListener()
     {
-        //to do
+        binding.sync.setOnClickListener {
+            binding.circularProgressIndicator.visibility = View.VISIBLE
+           (requireActivity() as MainActivity2).mainViewModel.syncNeedToBeCachedEmployees()
+        }
     }
 
 

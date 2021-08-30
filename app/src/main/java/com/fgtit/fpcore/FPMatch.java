@@ -15,6 +15,7 @@ public class FPMatch {
 	public native int MatchTemplate( byte[] piFeatureA, byte[] piFeatureB);
 	
 	static {
+
 		System.loadLibrary("fgtitalg");
 		System.loadLibrary("fpcore");
 	}

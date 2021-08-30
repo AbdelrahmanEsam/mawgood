@@ -10,11 +10,12 @@ import kotlinx.android.parcel.Parcelize
 @Entity(tableName = "EmpNeedsToBeSynced")
 @Parcelize
 data class EmpNeedsToBeSynced(
+
     @PrimaryKey    val _id: String,
 
-    val displayName: String?,
+    val displayName: String? = null,
 
-    val Date:String?,
+    val date:String?=null,
 
-    val Time:String?,
+    val time:Long?,
 ): Parcelable

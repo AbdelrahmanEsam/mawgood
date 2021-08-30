@@ -10,10 +10,10 @@ interface EmpNeedsToBeSyncedDao {
     @Query("SELECT * FROM EmpNeedsToBeSynced")
     fun getEmployeesNeedsToBeSynced(): List<EmpNeedsToBeSynced>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addSingleEmp(emp : EmpNeedsToBeSynced?)
 
     @Delete
-    fun deleteEmp(emp : EmpNeedsToBeSynced?)
+    fun deleteEmp(emp : EmpNeedsToBeSynced)
 
 }

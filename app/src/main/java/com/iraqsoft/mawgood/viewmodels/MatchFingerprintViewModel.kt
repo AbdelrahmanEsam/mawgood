@@ -49,7 +49,7 @@ class MatchFingerprintViewModel(private val fingerprintRepo: FingerPrintRpoInter
     val timerOn = ObservableBoolean()
 
     fun initFingerPrint() {
-        Log.e("fingerPrint" , "init fingerPrint");
+        Log.e("fingerPrint" , "init fingerPrint")
 
         try {
             status.value = "رجاء ادخل البصمة"
@@ -68,14 +68,14 @@ class MatchFingerprintViewModel(private val fingerprintRepo: FingerPrintRpoInter
 
     private fun setHandler(): String {
        viewModelScope.launch {
-           isGettingFingerPrint.set(false);
+           isGettingFingerPrint.set(false)
            Fingerprint.getInstance().setHandler(fingerprintHandler)
        }
-        return "done";
+        return "done"
     }
 
     fun getFingerPrint(){
-        Log.e("fingerPrint" , "start getting fingerPrint");
+        Log.e("fingerPrint" , "start getting fingerPrint")
         Thread.sleep(500L)
         if(!isGettingFingerPrint.get())
             Fingerprint.getInstance().Process()
@@ -113,7 +113,7 @@ class MatchFingerprintViewModel(private val fingerprintRepo: FingerPrintRpoInter
                             viewModelScope.launch(IO){
                                 val emps : List<GetResponseItem>  = fingerprintRepo.getEmps()
                                 val matchedData = ByteArray(512)
-                                System.arraycopy(fingerData , 0 , matchedData , 0 , 256) ;
+                                System.arraycopy(fingerData , 0 , matchedData , 0 , 256)
                                emps.forEach{
                                     val enroll1 = ByteArray(256)
                                     val enroll2 = ByteArray(256)
@@ -132,8 +132,7 @@ class MatchFingerprintViewModel(private val fingerprintRepo: FingerPrintRpoInter
                                             }
                                             is AppResult.Error -> {
                                                 val currentDate = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
-                                                val currentTime = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())
-                                                fingerprintRepo.cacheCheck(EmpNeedsToBeSynced(it._id, it.displayName, currentDate, currentTime))
+                                                fingerprintRepo.cacheCheck(EmpNeedsToBeSynced(it._id, it.displayName, currentDate, System.currentTimeMillis()))
                                                 Log.e("tag",response.exception.toString())
                                             }
                                         }

@@ -147,6 +147,21 @@
             app:layout_constraintStart_toStartOf="@+id/employees"
             app:layout_constraintTop_toBottomOf="@+id/sync" />
 
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/circularProgressIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="gone"
+            android:elevation="@dimen/_10sdp"
+            app:indicatorColor="@color/blue"
+            app:indicatorSize="@dimen/_40sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:trackThickness="@dimen/_3sdp" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

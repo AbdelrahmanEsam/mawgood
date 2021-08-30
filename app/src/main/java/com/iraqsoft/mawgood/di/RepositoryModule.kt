@@ -21,8 +21,8 @@ val repositoryModule = module {
     }
 
 
-    fun provideMainFragmentRepo(userDao : UserDao,selectedBranchesDao: SelectedBranchesDao,empNeedsToBeSyncedDao: EmpNeedsToBeSyncedDao): MainFragmentRepositoryInterface {
-        return MainFragmentRepositoryImp(userDao,selectedBranchesDao,empNeedsToBeSyncedDao)
+    fun provideMainFragmentRepo(api: ApiProvider,userDao : UserDao,selectedBranchesDao: SelectedBranchesDao,empNeedsToBeSyncedDao: EmpNeedsToBeSyncedDao): MainFragmentRepositoryInterface {
+        return MainFragmentRepositoryImp(api,userDao,selectedBranchesDao,empNeedsToBeSyncedDao)
     }
 
     fun provideDefineEmployeeRepo(api: ApiProvider,userDao : UserDao,selectedBranchesDao: SelectedBranchesDao,employeesDao: EmployeesDao): DefineEmployeeRepositoryInterface {
@@ -34,7 +34,7 @@ val repositoryModule = module {
     }
 
     single { provideLoginRepo(get(), get()) }
-    single { provideMainFragmentRepo(get(),get(),get()) }
+    single { provideMainFragmentRepo(get(),get(),get(),get()) }
     single { provideDefineEmployeeRepo(get(),get(),get(),get()) }
     single { provideFingerPrintRepo(get(),get(),get())}
 

@@ -40,7 +40,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <pl.droidsonroids.gif.GifImageView
             android:id="@+id/fingerPrintImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
             app:layout_constraintEnd_toEndOf="@+id/statusTextView"
             app:layout_constraintStart_toStartOf="@+id/statusTextView"
             app:layout_constraintTop_toBottomOf="@+id/statusTextView"
-            app:srcCompat="@drawable/ic_finger" />
+            android:src="@drawable/fingerprintgif" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/doneButton"
@@ -86,7 +86,7 @@
             android:backgroundTint="@color/red"
             android:paddingStart="@dimen/_60sdp"
             android:paddingEnd="@dimen/_60sdp"
-            android:text="البصمة عير صحيحة"
+            android:text="@string/print_is_not_correct"
             android:textSize="@dimen/_12sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

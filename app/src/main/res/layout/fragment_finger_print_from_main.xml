@@ -91,7 +91,7 @@
 <!--            app:layout_constraintEnd_toEndOf="parent"-->
 <!--            app:layout_constraintStart_toStartOf="parent" />-->
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <pl.droidsonroids.gif.GifImageView
             android:id="@+id/fingerPrintImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
             app:layout_constraintStart_toStartOf="@+id/statusTextView"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.6"
-            app:srcCompat="@drawable/ic_finger" />
+            android:src="@drawable/fingerprintgif" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/detailsConstraint"

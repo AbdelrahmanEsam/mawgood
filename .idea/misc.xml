@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/mawgood/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.11805555555555555" />
+        <entry key="..\:/mawgood/app/src/main/res/drawable/background_blue.xml" value="0.16111111111111112" />
         <entry key="..\:/mawgood/app/src/main/res/drawable/background_green.xml" value="0.22027491408934707" />
         <entry key="..\:/mawgood/app/src/main/res/drawable/border_top_green.xml" value="0.22027491408934707" />
         <entry key="..\:/mawgood/app/src/main/res/drawable/branch_selected_shape.xml" value="0.11805555555555555" />
@@ -43,7 +44,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

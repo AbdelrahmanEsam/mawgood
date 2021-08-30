@@ -9,7 +9,7 @@ import com.iraqsoft.mawgood.db.model.LoginCompanyResponse
 
 @Database(
     entities = [LoginCompanyResponse::class, Branch::class,GetResponseItem::class,EmpNeedsToBeSynced::class],
-    version = 5, exportSchema = false
+    version = 10, exportSchema = false
 )
 
 
