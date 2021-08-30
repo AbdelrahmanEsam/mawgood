@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_30sdp"
-            android:text="sdhfjgjfhdshjfdgdjsfgjds"
+            android:text="@{viewModel.status}"
             android:elevation="@dimen/_15sdp"
             android:textColor="@color/white"
             android:textSize="@dimen/_15sdp"

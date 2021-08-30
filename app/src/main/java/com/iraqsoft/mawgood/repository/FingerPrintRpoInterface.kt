@@ -8,7 +8,7 @@ import com.iraqsoft.mawgood.util.AppResult
 interface FingerPrintRpoInterface {
     suspend fun cashSingleEmp(emp : GetResponseItem?)
     suspend fun getEmps(): List<GetResponseItem>
-    suspend fun empCheck(empId: GetResponseItem): AppResult<Any>?
+    suspend fun empCheck(emp : GetResponseItem): AppResult<Any>?
 
     suspend fun cacheCheck(emp:EmpNeedsToBeSynced)
 }

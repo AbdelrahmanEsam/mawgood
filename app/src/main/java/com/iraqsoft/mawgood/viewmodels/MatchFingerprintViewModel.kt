@@ -115,14 +115,12 @@ class MatchFingerprintViewModel(private val fingerprintRepo: FingerPrintRpoInter
                                         fingerPrintMatch.postValue(1)
                                         status.postValue("تمت المعالجة بنجاح")
                                         emp.postValue(it)
-                                        when(val response = fingerprintRepo.empCheck(empId = it)){
+                                        when(val response = fingerprintRepo.empCheck(emp = it)){
                                             is AppResult.Success -> {
                                                 Log.e("check_emp" , "check emp success")
                                             }
                                             is AppResult.Error -> {
-                                                val currentDate = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
-                                                fingerprintRepo.cacheCheck(EmpNeedsToBeSynced(it._id, it.displayName, currentDate, System.currentTimeMillis()))
-                                                Log.e("tag",response.exception.toString())
+
                                             }
                                         }
                                     }
@@ -142,9 +140,11 @@ class MatchFingerprintViewModel(private val fingerprintRepo: FingerPrintRpoInter
                 }
                 Fingerprint.STATE_FAIL -> {
                     try{
+                        isGettingFingerPrint.set(false)
                         fingerPrintErrorFrom.postValue("STATE_FAIL")
                         fingerPrintError.postValue("FingerPrint Sensor can't get Value")
                         Fingerprint.getInstance().Process()
+                        resetFail()
                     }catch (e : Exception){
                         fingerPrintError.postValue(e.toString())
                     }
@@ -153,6 +153,13 @@ class MatchFingerprintViewModel(private val fingerprintRepo: FingerPrintRpoInter
         }
     }
 
+    private fun resetFail(){
+        viewModelScope.launch(Main) {
+            Thread.sleep(5000)
+            fingerPrintError.postValue("")
+
+        }
+    }
     private fun result(){
         viewModelScope.launch(Main) {
             if(fingerPrintMatch.value == -1 ) {
@@ -165,15 +172,17 @@ class MatchFingerprintViewModel(private val fingerprintRepo: FingerPrintRpoInter
             fingerPrintMatch.value = -1
         }
     }
-    fun counterWork(){
-        Thread.sleep(1000L)
-            timerOn.set(true)
-            fingerStayCounter.postValue(fingerStayCounter.value?.minus(1))
-            if(fingerStayCounter?.value!! >= 0){
-                counterWork()
-            }else{
-                timerOn.set(false)
+    fun test(){
+        viewModelScope.launch(IO) {
+            val emps : List<GetResponseItem>  = fingerprintRepo.getEmps()
+            when(val response = fingerprintRepo.empCheck(emp =emps[0])){
+                is AppResult.Success -> {
+                    Log.e("check_emp" , "check emp success")
+                }
+                is AppResult.Error -> {
+                    Log.e("check_emp" , "check emp error")
+                }
             }
-
+        }
     }
 }

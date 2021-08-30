@@ -50,7 +50,7 @@ class FingerPrintRepository(private val api: ApiProvider,private val dao:Employe
                 return  AppResult.Error(e)
             }
         }else{
-         val response =   empNeedToBeSynced.addSingleEmp(EmpNeedsToBeSynced(emp._id,emp.displayName,null,time = System.currentTimeMillis()/1000))
+            val response =   empNeedToBeSynced.addSingleEmp(EmpNeedsToBeSynced(emp._id,emp.displayName,null,time = System.currentTimeMillis()/1000))
             return   Utils.handleSuccess(Response.success(EmpNeedsToBeSynced(emp._id,emp.displayName,null,time = System.currentTimeMillis()/1000)))
         }
 

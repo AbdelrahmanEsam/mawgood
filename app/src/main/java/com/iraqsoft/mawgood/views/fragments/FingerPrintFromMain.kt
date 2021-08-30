@@ -43,6 +43,7 @@ class FingerPrintFromMain : Fragment() {
         mViewDataBinding.closeImageView.setOnClickListener {
             requireActivity().onBackPressed()
         }
+        fingerPrintViewModel.test()
 
     }
 
