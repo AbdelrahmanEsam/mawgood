@@ -140,6 +140,7 @@ class MainFragmentViewModel(private val mainRepo: MainFragmentRepositoryInterfac
         }.invokeOnCompletion {
             getEmployeesNeedsToBeSynced()
         }
+
     }
 
 

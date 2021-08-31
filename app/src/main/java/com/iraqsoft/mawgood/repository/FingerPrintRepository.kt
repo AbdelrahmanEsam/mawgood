@@ -1,5 +1,7 @@
 package com.iraqsoft.mawgood.repository
 
+import android.app.Application
+import android.content.Context
 import android.util.Log
 import com.iraqsoft.mawgood.ApiProvider
 import com.iraqsoft.mawgood.db.EmpNeedsToBeSyncedDao
@@ -15,7 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
 
-class FingerPrintRepository(private val api: ApiProvider,private val dao:EmployeesDao,private val empNeedToBeSynced:EmpNeedsToBeSyncedDao,private val checkConnection: CheckConnection) :FingerPrintRpoInterface {
+class FingerPrintRepository(private val api: ApiProvider,private val dao:EmployeesDao,private val empNeedToBeSynced:EmpNeedsToBeSyncedDao,private val context: Context) :FingerPrintRpoInterface {
     override suspend fun cashSingleEmp(emp: GetResponseItem?) {
         Log.e("cashSingleItem" , "start Function")
         if(emp != null ) {
@@ -34,7 +36,8 @@ class FingerPrintRepository(private val api: ApiProvider,private val dao:Employe
     }
 
     override suspend fun empCheck(emp: GetResponseItem): AppResult<Any>? {
-        if (checkConnection.value!!){
+        Log.e("online" , isOnline(context).toString())
+        if (isOnline(context)){
             return try {
                 val response =  api.check(emp._id)
                 if(response.isSuccessful){
@@ -50,12 +53,9 @@ class FingerPrintRepository(private val api: ApiProvider,private val dao:Employe
                 return  AppResult.Error(e)
             }
         }else{
-            val response =   empNeedToBeSynced.addSingleEmp(EmpNeedsToBeSynced(emp._id,emp.displayName,null,time = System.currentTimeMillis()/1000))
+            empNeedToBeSynced.addSingleEmp(EmpNeedsToBeSynced(emp._id,emp.displayName,null,time = System.currentTimeMillis()/1000))
             return   Utils.handleSuccess(Response.success(EmpNeedsToBeSynced(emp._id,emp.displayName,null,time = System.currentTimeMillis()/1000)))
         }
-
-
-
 
     }
 

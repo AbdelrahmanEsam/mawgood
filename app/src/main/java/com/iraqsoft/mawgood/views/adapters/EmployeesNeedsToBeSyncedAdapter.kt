@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.iraqsoft.mawgood.R
 import com.iraqsoft.mawgood.db.model.EmpNeedsToBeSynced
 import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 class EmployeesNeedsToBeSyncedAdapter(val context: Context) : RecyclerView.Adapter<EmployeesNeedsToBeSyncedAdapter.ViewHolder>() {
     private lateinit var data:List<EmpNeedsToBeSynced>
@@ -31,7 +33,7 @@ class EmployeesNeedsToBeSyncedAdapter(val context: Context) : RecyclerView.Adapt
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.apply {
             employeeName.text = data[position].displayName
-            employeeId.text = data[position].time.toString()
+            employeeId.text = getDateTime(data[position].time!!)
         }
 
     }
@@ -43,6 +45,16 @@ class EmployeesNeedsToBeSyncedAdapter(val context: Context) : RecyclerView.Adapt
     fun setDataAdapter(data:List<EmpNeedsToBeSynced>) {
         this.data = data
         notifyDataSetChanged()
+    }
+
+    private fun getDateTime(s: Long): String? {
+        return try {
+            val sdf = SimpleDateFormat("MM/dd/yyyy h:m:s")
+            val netDate = Date(s * 1000)
+            sdf.format(netDate)
+        } catch (e: Exception) {
+            e.toString()
+        }
     }
 
 

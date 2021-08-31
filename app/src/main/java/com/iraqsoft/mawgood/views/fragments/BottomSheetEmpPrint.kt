@@ -25,7 +25,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class BottomSheetEmpPrint : BottomSheetDialogFragment() {
 
     private val args:BottomSheetEmpPrintArgs by navArgs()
-    val fingerprintViewModel by viewModel<FingerPrintViewModel>()
+   private val fingerprintViewModel by viewModel<FingerPrintViewModel>()
     private lateinit var mViewDataBinding: PrintSuccededBottomSheetBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

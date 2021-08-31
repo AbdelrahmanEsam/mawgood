@@ -30,14 +30,14 @@ val repositoryModule = module {
         return DefineEmployeeRepositoryEmp(api,userDao,selectedBranchesDao,employeesDao)
     }
 
-    fun provideFingerPrintRepo(api: ApiProvider,employeesDao: EmployeesDao,empNeedsToBeSyncedDao: EmpNeedsToBeSyncedDao,checkConnection: CheckConnection): FingerPrintRpoInterface {
-        return FingerPrintRepository(api,employeesDao,empNeedsToBeSyncedDao,checkConnection)
+    fun provideFingerPrintRepo(api: ApiProvider,employeesDao: EmployeesDao,empNeedsToBeSyncedDao: EmpNeedsToBeSyncedDao,context: Context): FingerPrintRpoInterface {
+        return FingerPrintRepository(api,employeesDao,empNeedsToBeSyncedDao,context = context)
     }
 
     single { provideLoginRepo(get(), get()) }
     single { provideMainFragmentRepo(get(),get(),get(),get()) }
     single { provideDefineEmployeeRepo(get(),get(),get(),get()) }
-    single { provideFingerPrintRepo(get(),get(),get(),get())}
+    single { provideFingerPrintRepo(get(),get(),get(),androidContext())}
 
 
 }

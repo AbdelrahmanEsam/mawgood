@@ -36,6 +36,7 @@ class MatchFingerprintViewModel(private val fingerprintRepo: FingerPrintRpoInter
     val isGettingFingerPrint = ObservableBoolean()
     val saveFingerprintSuccess = ObservableBoolean()
     val timerOn = ObservableBoolean()
+    val readingGifVisibility = ObservableBoolean()
 
     fun initFingerPrint() {
         Log.e("fingerPrint" , "init fingerPrint")
@@ -76,6 +77,7 @@ class MatchFingerprintViewModel(private val fingerprintRepo: FingerPrintRpoInter
         override fun handleMessage(msg: Message) {
             when(msg.what){
                  Fingerprint.STATE_PLACE -> {
+                     readingGifVisibility.set(false)
                      isGettingFingerPrint.set(true)
                      fingerPrintError.value = "FingerPrint Sensor can't get Value"
                      val message = "رجاء ادخل البصمة"
@@ -86,6 +88,7 @@ class MatchFingerprintViewModel(private val fingerprintRepo: FingerPrintRpoInter
                     try{
                         fingerPrintErrorFrom.postValue("STATE_GETIMAGE")
                         status.postValue("يتم قراءة البصمة")
+                        readingGifVisibility.set(true)
                     }catch (e : Exception){
                         fingerPrintError.postValue(e.toString())
                     }
@@ -127,6 +130,7 @@ class MatchFingerprintViewModel(private val fingerprintRepo: FingerPrintRpoInter
                                 }
 
 
+                                readingGifVisibility.set(false)
                                 result()
                                 Fingerprint.getInstance().Process()
 
