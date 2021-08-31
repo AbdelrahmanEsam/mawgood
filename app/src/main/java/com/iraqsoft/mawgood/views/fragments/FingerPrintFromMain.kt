@@ -1,5 +1,6 @@
 package com.iraqsoft.mawgood.views.fragments
 
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.iraqsoft.mawgood.R
 import com.iraqsoft.mawgood.databinding.FragmentFingerPrintFromMainBinding
@@ -21,6 +24,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class FingerPrintFromMain : BottomSheetDialogFragment() {
     private val fingerPrintViewModel by viewModel<MatchFingerprintViewModel>()
     private lateinit var mViewDataBinding: FragmentFingerPrintFromMainBinding
+    private lateinit var nav: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NORMAL,R.style.bottomSheetThemeRadius)
@@ -39,6 +43,7 @@ class FingerPrintFromMain : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        nav = Navigation.findNavController(requireParentFragment().requireView())
         fingerPrintViewModel.initFingerPrint()
         fingerPrintViewModel.getFingerPrint()
         mViewDataBinding.closeImageView.setOnClickListener {
@@ -51,11 +56,15 @@ class FingerPrintFromMain : BottomSheetDialogFragment() {
     private fun closeObserver(){
         fingerPrintViewModel.emp.observe(viewLifecycleOwner,{
             if (it != null && fingerPrintViewModel.fingerPrintMatch.value != 0){
-                requireActivity().onBackPressed()
+               nav.navigate(FingerPrintFromMainDirections.actionFingerPrintFromMainToSuccessDialogFragment(it.displayName))
             }
 
         })
     }
+
+
+
+
 
 
 

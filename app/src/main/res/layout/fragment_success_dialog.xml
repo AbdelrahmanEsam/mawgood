@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent">
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/employeeData"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/_15sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/green"
+            android:elevation="0dp">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_115sdp"
+                android:background="@color/white">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/doneButton"
+                    style="@style/cairo_bold_16"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_45sdp"
+                    android:background="@drawable/border_top_green"
+                    android:drawableEnd="@drawable/ic_select_green"
+                    android:paddingStart="@dimen/_60sdp"
+                    android:paddingEnd="@dimen/_60sdp"
+                    android:text="@string/fingerprint_succeded"
+                    android:textSize="@dimen/_12sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/employeeImageView"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:srcCompat="@drawable/place_holder"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+
+                <TextView
+                    android:id="@+id/nameTextView"
+                    style="@style/cairo_regular_16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/blueBlack"
+                    app:layout_constraintBottom_toBottomOf="@+id/employeeImageView"
+                    app:layout_constraintEnd_toStartOf="@+id/employeeImageView"
+                    app:layout_constraintTop_toTopOf="@+id/employeeImageView"
+                    tools:text="اسم المستخدم" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/selectImageView"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    app:layout_constraintBottom_toBottomOf="@+id/nameTextView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/nameTextView"
+                    app:srcCompat="@drawable/ic_select_green_background" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
+

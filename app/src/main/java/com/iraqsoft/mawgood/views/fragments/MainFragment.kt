@@ -32,11 +32,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         listeners()
 
 
-
-
-
-
-
     }
 
     private fun listeners(){
@@ -55,9 +50,12 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private fun fingerprintListener()
     {
         binding.cardViewFingerPrint.setOnClickListener {
-            navigateToFingerprintBottomSheet()
+          navigateToFingerprintBottomSheet()
+
         }
     }
+
+
 
 
 
