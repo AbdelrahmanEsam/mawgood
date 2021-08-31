@@ -79,7 +79,6 @@ class MatchFingerprintViewModel(private val fingerprintRepo: FingerPrintRpoInter
                  Fingerprint.STATE_PLACE -> {
                      readingGifVisibility.set(false)
                      isGettingFingerPrint.set(true)
-                     fingerPrintError.value = "FingerPrint Sensor can't get Value"
                      val message = "رجاء ادخل البصمة"
                      status.postValue(message )
                 }
@@ -116,7 +115,7 @@ class MatchFingerprintViewModel(private val fingerprintRepo: FingerPrintRpoInter
                                     if(FPMatch.getInstance().MatchTemplate(enroll1 ,matchedData) > 60 || FPMatch.getInstance().MatchTemplate(enroll2 , matchedData) > 60){
                                         saveFingerprintSuccess.set(true)
                                         fingerPrintMatch.postValue(1)
-                                        status.postValue("تمت المعالجة بنجاح")
+//                                        status.postValue("تمت المعالجة بنجاح")
                                         emp.postValue(it)
                                         when(val response = fingerprintRepo.empCheck(emp = it)){
                                             is AppResult.Success -> {
@@ -132,6 +131,7 @@ class MatchFingerprintViewModel(private val fingerprintRepo: FingerPrintRpoInter
 
                                 readingGifVisibility.set(false)
                                 result()
+                                Thread.sleep(1750L)
                                 Fingerprint.getInstance().Process()
 
                             }
