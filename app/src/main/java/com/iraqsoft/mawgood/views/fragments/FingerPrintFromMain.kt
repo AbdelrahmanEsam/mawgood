@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.iraqsoft.mawgood.R
 import com.iraqsoft.mawgood.databinding.FragmentFingerPrintFromMainBinding
 import com.iraqsoft.mawgood.databinding.FragmentFingerprintTestBinding
@@ -17,12 +18,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
-class FingerPrintFromMain : Fragment() {
+class FingerPrintFromMain : BottomSheetDialogFragment() {
     private val fingerPrintViewModel by viewModel<MatchFingerprintViewModel>()
     private lateinit var mViewDataBinding: FragmentFingerPrintFromMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        setStyle(STYLE_NORMAL,R.style.bottomSheetThemeRadius)
     }
 
     override fun onCreateView(
@@ -44,8 +45,21 @@ class FingerPrintFromMain : Fragment() {
             requireActivity().onBackPressed()
         }
         fingerPrintViewModel.test()
-
+        closeObserver()
     }
+
+    private fun closeObserver(){
+        fingerPrintViewModel.emp.observe(viewLifecycleOwner,{
+            if (it != null && fingerPrintViewModel.fingerPrintMatch.value != 0){
+                requireActivity().onBackPressed()
+            }
+
+        })
+    }
+
+
+
+
 
 
 

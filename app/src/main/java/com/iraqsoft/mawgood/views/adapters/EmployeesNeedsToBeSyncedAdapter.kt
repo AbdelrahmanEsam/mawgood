@@ -16,13 +16,8 @@ class EmployeesNeedsToBeSyncedAdapter(val context: Context) : RecyclerView.Adapt
     private lateinit var data:List<EmpNeedsToBeSynced>
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     {
-
         val employeeName: TextView = itemView.findViewById(R.id.nameTextView)
         val employeeId: TextView = itemView.findViewById(R.id.idTextView)
-
-
-
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

@@ -90,10 +90,9 @@
             android:name="position"
             app:argType="integer" />
     </dialog>
-    <fragment
+    <dialog
         android:id="@+id/fingerPrintFromMain"
         android:name="com.iraqsoft.mawgood.views.fragments.FingerPrintFromMain"
         android:label="FingerPrintFromMain"
-        tools:layout="@layout/fragment_finger_print_from_main"
-        />
+        tools:layout="@layout/fragment_finger_print_from_main" />
 </navigation>
