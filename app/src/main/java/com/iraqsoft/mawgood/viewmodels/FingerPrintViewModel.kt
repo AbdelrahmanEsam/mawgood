@@ -31,6 +31,7 @@ class FingerPrintViewModel(private val fingerprintRepo: FingerPrintRpoInterface)
     val isGettingFingerPrint = ObservableBoolean()
     val saveFingerprintSuccess = ObservableBoolean()
     var emp : GetResponseItem? = null
+    val readingGifVisibility = ObservableBoolean()
     fun initFingerPrint(empData : GetResponseItem?) {
         try {
             status.value = "رجاء ادخل البصمة"
@@ -77,6 +78,7 @@ class FingerPrintViewModel(private val fingerprintRepo: FingerPrintRpoInterface)
             when(msg.what){
                  Fingerprint.STATE_PLACE -> {
                      isGettingFingerPrint.set(true)
+                     readingGifVisibility.set(false)
                      fingerPrintMatch.value = -1 ;
                      val message = if(enrollCount == 1 )
                          "رجاء ادخل البصمة"
@@ -88,6 +90,7 @@ class FingerPrintViewModel(private val fingerprintRepo: FingerPrintRpoInterface)
 
                 Fingerprint.STATE_GETIMAGE -> {
                     try{
+                        readingGifVisibility.set(true)
                         fingerPrintErrorFrom.postValue("STATE_GETIMAGE")
                         status.postValue("يتم قراءة البصمة")
                     }catch (e : Exception){
@@ -121,7 +124,7 @@ class FingerPrintViewModel(private val fingerprintRepo: FingerPrintRpoInterface)
                                 saveFingerprintSuccess.set(true)
                             }
 
-
+                        readingGifVisibility.set(false)
                         isGettingFingerPrint.set(false)
                     }catch (e : Exception){
                         fingerPrintError.postValue(e.toString())
