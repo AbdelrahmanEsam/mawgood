@@ -1,4 +1,4 @@
-package com.iraqsoft.mawgood.domain.repository
+package com.iraqsoft.mawgood.data.repository
 
 import android.util.Log
 import com.iraqsoft.mawgood.data.remote.ApiProvider
@@ -7,6 +7,7 @@ import com.iraqsoft.mawgood.data.dataBase.SelectedBranchesDao
 import com.iraqsoft.mawgood.data.dataBase.UserDao
 import com.iraqsoft.mawgood.data.model.GetResponse
 import com.iraqsoft.mawgood.data.model.GetResponseItem
+import com.iraqsoft.mawgood.domain.repository.DefineEmployeeRepositoryInterface
 import com.iraqsoft.mawgood.util.AppResult
 import com.iraqsoft.mawgood.util.Utils.handleApiError
 import com.iraqsoft.mawgood.util.Utils.handleSuccess

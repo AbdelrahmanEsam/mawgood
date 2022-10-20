@@ -9,6 +9,10 @@ import com.iraqsoft.mawgood.data.dataBase.EmpNeedsToBeSyncedDao
 import com.iraqsoft.mawgood.data.dataBase.EmployeesDao
 import com.iraqsoft.mawgood.data.dataBase.SelectedBranchesDao
 import com.iraqsoft.mawgood.data.dataBase.UserDao
+import com.iraqsoft.mawgood.data.repository.DefineEmployeeRepositoryEmp
+import com.iraqsoft.mawgood.data.repository.FingerPrintRepository
+import com.iraqsoft.mawgood.data.repository.LoginRepositoryImp
+import com.iraqsoft.mawgood.data.repository.MainFragmentRepositoryImp
 import com.iraqsoft.mawgood.domain.repository.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module

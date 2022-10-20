@@ -1,4 +1,4 @@
-package com.iraqsoft.mawgood.domain.repository
+package com.iraqsoft.mawgood.data.repository
 
 import android.content.Context
 import android.util.Log
@@ -7,6 +7,7 @@ import com.iraqsoft.mawgood.data.dataBase.EmpNeedsToBeSyncedDao
 import com.iraqsoft.mawgood.data.dataBase.EmployeesDao
 import com.iraqsoft.mawgood.data.model.EmpNeedsToBeSynced
 import com.iraqsoft.mawgood.data.model.GetResponseItem
+import com.iraqsoft.mawgood.domain.repository.FingerPrintRpoInterface
 import com.iraqsoft.mawgood.util.AppResult
 import com.iraqsoft.mawgood.util.NetworkManager.isOnline
 import com.iraqsoft.mawgood.util.Utils

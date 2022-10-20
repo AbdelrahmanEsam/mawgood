@@ -1,8 +1,9 @@
-package com.iraqsoft.mawgood.domain.repository
+package com.iraqsoft.mawgood.data.repository
 
 import com.iraqsoft.mawgood.data.remote.ApiProvider
 import com.iraqsoft.mawgood.data.dataBase.UserDao
 import com.iraqsoft.mawgood.data.model.LoginCompanyResponse
+import com.iraqsoft.mawgood.domain.repository.LoginRepositoryInterface
 import com.iraqsoft.mawgood.util.AppResult
 import com.iraqsoft.mawgood.util.Utils.handleApiError
 import com.iraqsoft.mawgood.util.Utils.handleSuccess
