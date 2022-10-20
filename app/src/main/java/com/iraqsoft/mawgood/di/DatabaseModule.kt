@@ -4,7 +4,7 @@ package com.iraqsoft.mawgood.di
 //import com.iraqsoft.mawgood.db.CountriesDatabase
 import android.app.Application
 import androidx.room.Room
-import com.iraqsoft.mawgood.db.*
+import com.iraqsoft.mawgood.data.dataBase.*
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 

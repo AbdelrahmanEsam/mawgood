@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.activities.MainActivity2">
+    tools:context=".presentation.activities.mainActivity.MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/homeNavLayout"

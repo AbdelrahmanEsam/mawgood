@@ -10,9 +10,9 @@ import android_serialport_api.AsyncFingerprint;
 import android_serialport_api.SerialPortManager;
 
 public class Fingerprint {
-	
+
 	public static final int STATE_NONE = 0;
-	public static final int STATE_PLACE = 1;	
+	public static final int STATE_PLACE = 1;
 	public static final int STATE_LIFT = 2;
 	public static final int STATE_GETIMAGE = 3;
 	public static final int STATE_UPIMAGE = 4;
@@ -24,24 +24,24 @@ public class Fingerprint {
 	public static final int STATE_FAIL = 7;
 	private byte[] bufferex;
 	private static Fingerprint instance;
-	
+
 	public static Fingerprint getInstance() {
     	if(null == instance) {
     		instance = new Fingerprint();
     	}
     	return instance;
     }
-	
+
 	private Context pcontext=null;
 	private Handler phandler=null;
-	
+
 	private AsyncFingerprint vFingerprint;
     private boolean			 bfpWork=false;
     private boolean			 bIsUpImage=true;
     private boolean			 bIsCancel=false;
-    	
-	
-    
+
+
+
     private final int CMDHEADERSIZE=7;
 	private final int CMDIDPOS=3;
 	private final int CMDPARPOS=4;
@@ -52,9 +52,9 @@ public class Fingerprint {
 	private final byte NEXTPKG=2;
 	private final byte ENDPKG=3;
 	private final byte PKGERR=4;
-	
+
 	private final byte ZCMD_TESTLINK=0x00;
-	private final byte ZCMD_GETVERSION=0x01; 
+	private final byte ZCMD_GETVERSION=0x01;
 	private final byte ZCMD_ADJUSTTIME=0x02;
 	private final byte ZCMD_DNUSERINFO=0x05;
 	private final byte ZCMD_DELALLUSERS=0x09;
@@ -78,27 +78,27 @@ public class Fingerprint {
 	public void setContext(Context context){
 		pcontext=context;
     }
-	
+
 	public void setHandler(Handler handler){
 		phandler=handler;
     }
-	
+
 	private void SendMessage(int msg,byte[] data){
 		if(phandler!=null)
 			phandler.obtainMessage(msg, data).sendToTarget();
 	}
-	
+
 	public void SetUpImage(boolean isup){
 		bIsUpImage=isup;
 	}
-	
+
 	public boolean IsUpImage(){
 		return bIsUpImage;
 	}
-	
+
 	public void Open(){
 		vFingerprint = SerialPortManager.getInstance().getNewAsyncFingerprint();
-		
+
 		vFingerprint.setOnGetImageListener(new AsyncFingerprint.OnGetImageListener() {
             @Override
             public void onGetImageSuccess() {
@@ -173,7 +173,7 @@ public class Fingerprint {
 		    		text=text+ Integer.toHexString(data[i]&0xFF).toUpperCase();
 		    	}
 				Log.i("cylnhs", text);
-				NetCommandProcess(data);	
+				NetCommandProcess(data);
 			}
 
 			@Override
@@ -235,7 +235,7 @@ public class Fingerprint {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void Close(){
 		bIsCancel=true;
         bfpWork=false;
@@ -244,7 +244,7 @@ public class Fingerprint {
 	public void CloseProcess(){
 		bfpWork = true;
 	}
-	
+
 	public void Process(){
 		bfpWork = false;
 		if(!bfpWork){
@@ -257,10 +257,10 @@ public class Fingerprint {
 			}
         }
 	}
-	public void GetIdCardNO(){		
+	public void GetIdCardNO(){
 		vFingerprint.FP_GetIdCardNO();
 	}
-	
+
 	public void Cancel(){
 		bIsCancel=true;
 	}
@@ -272,7 +272,7 @@ public class Fingerprint {
 			}
 		case ZCMD_GETVERSION:{
 			return FillRetData(revdata,ALLPKG,null,0);
-			}		
+			}
 		case ZCMD_CLOSELINK:{
 			return FillRetData(revdata,ALLPKG,null,0);
 			}
@@ -312,7 +312,7 @@ public class Fingerprint {
 			return FillRetData(revdata,ALLPKG,null,0);
 			}
 		case ZCMD_GETOPTION:{
-			
+
 			//SystemClock.sleep(1000);
 			return FillRetData(revdata,ALLPKG,null,0);
 			}
@@ -333,7 +333,7 @@ public class Fingerprint {
 		case ZCMD_RELOADUSERS:{
 		//	UsersList.getInstance().LoadAll();
 			return FillRetData(revdata,ALLPKG,null,0);
-			}        
+			}
 		case ZCMD_UPLOGRECORD1:{
 			return FillRetData(revdata,ALLPKG,null,0);
 			}
@@ -358,7 +358,7 @@ public class Fingerprint {
 		}
 		return FillRetData(revdata,ALLPKG,null,0);
 	}
-    
+
     public byte[] NetCommandProcessex(byte[] revdata){
 		switch((byte)revdata[0]){
 		case ZCMD_TESTLINK:{
@@ -369,7 +369,7 @@ public class Fingerprint {
 		case ZCMD_GETVERSION:{
 			byte[] version=new byte[]{0x02,0x04,0x00,0x05,0x00,0x09,0x03};
 			return FillRetDataex(version,version.length);
-			}		
+			}
 		case ZCMD_CLOSELINK:{
 			byte[] version=new byte[]{0x02,0x04,0x00,0x05,0x00,0x09,0x03};
 			return FillRetDataex(version,version.length);
@@ -450,9 +450,9 @@ public class Fingerprint {
 			byte[] buffer={(byte)0xef,0x01,(byte)0xff,(byte)0xff,(byte)0xff,(byte)0xff,0x07,0x00,0x03,0x00,0x00,0x0a};
 			vFingerprint.FP_RS422ex(buffer);
 			return null;
-			}        
+			}
 		case ZCMD_UPLOGRECORD1:{
-			int count=getInt(revdata,1);			
+			int count=getInt(revdata,1);
 			/*byte[] bi=LogsList.getInstance().LogItemToBytes(LogsList.getInstance().logsList.get(count));
 			return FillRetDataex(bi,bi.length);*/
 			}
@@ -502,7 +502,7 @@ public class Fingerprint {
 		int CheckSize=3+insize;
 		int sndsize=6+CheckSize+2;
 		byte[] snddata=new byte[sndsize];
-		
+
 		snddata[0]=(byte)0xef;
 		snddata[1]=(byte)0x01;
 		snddata[2]=(byte)0xff;
@@ -517,7 +517,7 @@ public class Fingerprint {
 		}
 		short sum = 0;
 		for (int j = 0; j < CheckSize; j++) {
-			sum += (snddata[j+6] & 0xff);								
+			sum += (snddata[j+6] & 0xff);
 		}
 		byte[] size = short2byte(sum);
 		snddata[sndsize - 2] = size[0];
@@ -543,7 +543,7 @@ public class Fingerprint {
 		temp |= (b2 & 0xff);
 		return temp;
 	}
-	
+
 	private int getInt(byte[] data,int offset) {
 		int temp = 0;
 		temp |= (data[offset+3] & 0xff);
@@ -556,7 +556,7 @@ public class Fingerprint {
 		return temp;
 	}
 
-	
+
 	public int ZCheckSum(byte[] buffer,int size){
 		int i;
 		long uiCheckSum=0;

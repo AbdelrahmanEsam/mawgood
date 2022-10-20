@@ -1,6 +1,6 @@
 package com.iraqsoft.mawgood.di
 
-import com.iraqsoft.mawgood.ApiProvider
+import com.iraqsoft.mawgood.data.remote.ApiProvider
 import org.koin.dsl.module
 import retrofit2.Retrofit
 

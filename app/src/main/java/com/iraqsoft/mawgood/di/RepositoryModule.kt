@@ -1,16 +1,15 @@
 package com.iraqsoft.mawgood.di
 
-import com.iraqsoft.mawgood.ApiProvider
+import com.iraqsoft.mawgood.data.remote.ApiProvider
 //import com.iraqsoft.mawgood.db.CountriesDao
 //import com.iraqsoft.mawgood.repository.CountriesRepository
 //import com.iraqsoft.mawgood.repository.CountriesRepositoryImpl
 import android.content.Context
-import com.iraqsoft.mawgood.db.EmpNeedsToBeSyncedDao
-import com.iraqsoft.mawgood.db.EmployeesDao
-import com.iraqsoft.mawgood.db.SelectedBranchesDao
-import com.iraqsoft.mawgood.db.UserDao
-import com.iraqsoft.mawgood.repository.*
-import com.iraqsoft.mawgood.util.CheckConnection
+import com.iraqsoft.mawgood.data.dataBase.EmpNeedsToBeSyncedDao
+import com.iraqsoft.mawgood.data.dataBase.EmployeesDao
+import com.iraqsoft.mawgood.data.dataBase.SelectedBranchesDao
+import com.iraqsoft.mawgood.data.dataBase.UserDao
+import com.iraqsoft.mawgood.domain.repository.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
@@ -22,15 +21,15 @@ val repositoryModule = module {
     }
 
 
-    fun provideMainFragmentRepo(api: ApiProvider,userDao : UserDao,selectedBranchesDao: SelectedBranchesDao,empNeedsToBeSyncedDao: EmpNeedsToBeSyncedDao): MainFragmentRepositoryInterface {
+    fun provideMainFragmentRepo(api: ApiProvider, userDao : UserDao, selectedBranchesDao: SelectedBranchesDao, empNeedsToBeSyncedDao: EmpNeedsToBeSyncedDao): MainFragmentRepositoryInterface {
         return MainFragmentRepositoryImp(api,userDao,selectedBranchesDao,empNeedsToBeSyncedDao)
     }
 
-    fun provideDefineEmployeeRepo(api: ApiProvider,userDao : UserDao,selectedBranchesDao: SelectedBranchesDao,employeesDao: EmployeesDao): DefineEmployeeRepositoryInterface {
+    fun provideDefineEmployeeRepo(api: ApiProvider, userDao : UserDao, selectedBranchesDao: SelectedBranchesDao, employeesDao: EmployeesDao): DefineEmployeeRepositoryInterface {
         return DefineEmployeeRepositoryEmp(api,userDao,selectedBranchesDao,employeesDao)
     }
 
-    fun provideFingerPrintRepo(api: ApiProvider,employeesDao: EmployeesDao,empNeedsToBeSyncedDao: EmpNeedsToBeSyncedDao,context: Context): FingerPrintRpoInterface {
+    fun provideFingerPrintRepo(api: ApiProvider, employeesDao: EmployeesDao, empNeedsToBeSyncedDao: EmpNeedsToBeSyncedDao, context: Context): FingerPrintRpoInterface {
         return FingerPrintRepository(api,employeesDao,empNeedsToBeSyncedDao,context = context)
     }
 

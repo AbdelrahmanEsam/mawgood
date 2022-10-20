@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/defineEmployeeFragment"
-        android:name="com.iraqsoft.mawgood.views.fragments.DefineEmployeeFragment"
+        android:name="com.iraqsoft.mawgood.presentation.fragments.defineEmplyeeFragment.DefineEmployeeFragment"
         android:label="fragment_define_empolyee"
         tools:layout="@layout/fragment_define_empolyee" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.iraqsoft.mawgood.views.fragments.MainFragment"
+        android:name="com.iraqsoft.mawgood.presentation.fragments.mainFragment.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
@@ -33,19 +33,19 @@
     </fragment>
     <dialog
         android:id="@+id/bottomSheetCompanySelector"
-        android:name="com.iraqsoft.mawgood.views.fragments.BottomSheetBranchesSelector"
+        android:name="com.iraqsoft.mawgood.presentation.fragments.bottomSheetBranchSelector.BottomSheetBranchesSelector"
         android:label="BottomSheetCompanySelector"
         tools:layout="@layout/bottom_sheet_branches_selector"
         />
     <dialog
         android:id="@+id/bottomSheetEmpPrint"
-        android:name="com.iraqsoft.mawgood.views.fragments.BottomSheetEmpPrint"
+        android:name="com.iraqsoft.mawgood.presentation.fragments.BottomSheetEmpPrint"
         android:label="BottomSheetEmpPrint"
         tools:layout="@layout/print_succeded_bottom_sheet"
         >
         <argument
             android:name="selectedEmp"
-            app:argType="com.iraqsoft.mawgood.db.model.GetResponse"
+            app:argType="com.iraqsoft.mawgood.data.model.GetResponse"
             app:nullable="true" />
         <argument
             android:name="position"
@@ -53,7 +53,7 @@
     </dialog>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.iraqsoft.mawgood.views.fragments.LoginFragment"
+        android:name="com.iraqsoft.mawgood.presentation.fragments.loginFragment.LoginFragment"
         android:label="login_fragment"
         tools:layout="@layout/login_fragment" >
         <action
@@ -66,7 +66,7 @@
     </fragment>
     <fragment
         android:id="@+id/enterYourCodeFragment"
-        android:name="com.iraqsoft.mawgood.views.fragments.EnterYourCodeFragment"
+        android:name="com.iraqsoft.mawgood.presentation.fragments.enterYourCodeFragment.EnterYourCodeFragment"
         android:label="fragment_enter_your_code"
         tools:layout="@layout/fragment_enter_your_code" >
         <action
@@ -75,7 +75,7 @@
     </fragment>
     <dialog
         android:id="@+id/printBottomSheet"
-        android:name="com.iraqsoft.mawgood.views.fragments.PrintBottomSheet"
+        android:name="com.iraqsoft.mawgood.presentation.fragments.PrintBottomSheet"
         android:label="PrintBottomSheet"
 
         tools:layout="@layout/print_bottom_sheet"
@@ -85,14 +85,14 @@
             app:destination="@id/bottomSheetEmpPrint" />
         <argument
             android:name="selectedEmp"
-            app:argType="com.iraqsoft.mawgood.db.model.GetResponse" />
+            app:argType="com.iraqsoft.mawgood.data.model.GetResponse" />
         <argument
             android:name="position"
             app:argType="integer" />
     </dialog>
     <dialog
         android:id="@+id/fingerPrintFromMain"
-        android:name="com.iraqsoft.mawgood.views.fragments.FingerPrintFromMain"
+        android:name="com.iraqsoft.mawgood.presentation.fragments.fingerPrintFromMain.FingerPrintFromMain"
         android:label="FingerPrintFromMain"
         tools:layout="@layout/fragment_finger_print_from_main" >
         <action
@@ -103,7 +103,7 @@
     </dialog>
     <dialog
         android:id="@+id/successDialogFragment"
-        android:name="com.iraqsoft.mawgood.views.fragments.SuccessDialogFragment"
+        android:name="com.iraqsoft.mawgood.presentation.fragments.SuccessDialogFragment"
         android:label="fragment_dialog"
         tools:layout="@layout/fragment_success_dialog"
 

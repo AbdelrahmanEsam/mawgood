@@ -4,8 +4,8 @@ import androidx.room.TypeConverter
 import com.google.gson.reflect.TypeToken
 
 import com.google.gson.Gson
-import com.iraqsoft.mawgood.db.model.Branch
-import com.iraqsoft.mawgood.db.model.Location
+import com.iraqsoft.mawgood.data.model.Branch
+import com.iraqsoft.mawgood.data.model.Location
 import java.util.ArrayList
 
 

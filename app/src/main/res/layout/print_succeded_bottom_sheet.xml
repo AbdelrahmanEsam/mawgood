@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.iraqsoft.mawgood.viewmodels.FingerPrintViewModel" />
+            type="com.iraqsoft.mawgood.presentation.fragments.fingerPrintFragment.FingerPrintViewModel" />
 
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout

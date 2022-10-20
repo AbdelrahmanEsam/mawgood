@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.iraqsoft.mawgood.viewmodels.MainFragmentViewModel" />
+            type="com.iraqsoft.mawgood.presentation.activities.mainActivity.MainFragmentViewModel" />
     </data>
     <ScrollView
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/semiWhite"
-        tools:context=".views.fragments.EnterYourCodeFragment">
+        tools:context=".presentation.fragments.enterYourCodeFragment.EnterYourCodeFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout2"
